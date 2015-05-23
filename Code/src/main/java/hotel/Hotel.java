@@ -1,6 +1,9 @@
 package hotel;
 
+import spark.QueryParamsMap;
+
 public class Hotel {
+    private int id;
     private int code;
     private int agentCode;
     private int locationCode;
@@ -28,5 +31,20 @@ public class Hotel {
     public int getAgentCode() {
         return agentCode;
     }
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public static Hotel fromQueryParams(QueryParamsMap queryMap) {
+        return new Hotel(
+            queryMap.get("code").integerValue(),
+            queryMap.get("agentCode").integerValue(),
+            queryMap.get("locationCode").integerValue(),
+            queryMap.get("includesBreakfast").booleanValue());
+    }
 }

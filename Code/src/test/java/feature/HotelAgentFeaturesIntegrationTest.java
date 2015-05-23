@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import spark.Spark;
 
-public class PostRoomEndpointIntegrationTest {
+public class HotelAgentFeaturesIntegrationTest {
     private static final String HOTEL_CODE = "1";
     private static final String AGENT_CODE = "1";
     private static final String LOCATION_CODE = "1";

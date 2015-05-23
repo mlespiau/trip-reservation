@@ -9,6 +9,9 @@ import hotel.TimeSlot;
 import integration.Request;
 import integration.TestResponse;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -35,11 +38,12 @@ public class HotelAgentFeaturesIntegrationTest {
     
     @Test
     public void aNewHotelShouldBeCreated() {
-        String postParams = "code=" + HOTEL_CODE + "&";
-        postParams += "agentCode=" + AGENT_CODE + "&";
-        postParams += "locationCode=" + LOCATION_CODE + "&";
-        postParams += "includesBreakfast=" + INCLUDES_BREAKFAST;
-        TestResponse res = Request.post("/hotel?" + postParams);
+        Map<String, String> postParameters = new HashMap<String, String>();
+        postParameters.put("code", HOTEL_CODE);
+        postParameters.put("agentCode", AGENT_CODE);
+        postParameters.put("locationCode", LOCATION_CODE);
+        postParameters.put("includesBreakfast", INCLUDES_BREAKFAST);
+        TestResponse res = Request.post("/hotel", postParameters);
         assertEquals(200, res.status);
         Hotel hotel = Hotel.fromJsonString(res.body);
         assertEquals(Integer.parseInt(AGENT_CODE), hotel.getAgentCode());

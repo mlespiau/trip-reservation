@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 public class RoomTimeSlot {
     private TimeSlot timeSlot;
     private Room room;
+    private int id;
 
     public RoomTimeSlot(Room room, TimeSlot timeSlot) {
         this.timeSlot = timeSlot;
@@ -14,8 +15,17 @@ public class RoomTimeSlot {
     public TimeSlot getTimeSlot() {
         return timeSlot;
     }
+    
     public Room getRoom() {
         return room;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public static RoomTimeSlot fromJsonString(String json) {

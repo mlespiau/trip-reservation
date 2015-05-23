@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 import hotel.Room;
+import hotel.RoomTimeSlot;
 import hotel.TimeSlot;
 
 import java.io.IOException;
@@ -32,13 +33,14 @@ public class PostRoomEndpointIntegrationTest {
 
     @Test
     public void aNewRoomShouldBeCreated() {
-        TestResponse res = request("POST", "/room?code=1&hotelCode=1&adultSpace=1&childrenSpace=1&availableFrom=2015-12-01&availableTo=2016-01-15&locationCode=1&includesBreakfast=true&agentCode=1");
-        Room room = Room.fromJsonString(res.body);
+        TestResponse res = request("POST", "/room/timeslot?code=1&hotelCode=1&adultSpace=1&childrenSpace=1&availableFrom=2015-12-01&availableTo=2016-01-15&locationCode=1&includesBreakfast=true&agentCode=1");
+        RoomTimeSlot roomTimeSlot = RoomTimeSlot.fromJsonString(res.body);
+        Room room = roomTimeSlot.getRoom();
+        TimeSlot timeSlot = roomTimeSlot.getTimeSlot();
         assertEquals(200, res.status);
         assertEquals(1, room.getHotel().getAgentCode());
         assertEquals(1, room.getAdultSpace());
         assertEquals(1, room.getChildrenSpace());
-        TimeSlot timeSlot = room.getTimeAvailability().stream().findFirst().get();
         assertEquals("2015-12-01", timeSlot.getFrom().toString());		
         assertEquals("2016-01-15", timeSlot.getTo().toString());
         // TODO: Failing test until database integration is implemented

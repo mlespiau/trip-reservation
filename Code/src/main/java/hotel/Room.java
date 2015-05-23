@@ -45,10 +45,6 @@ public class Room {
         );
     }
     
-    public static Room fromJsonString(String json) {
-        return new Gson().fromJson(json, Room.class);
-    }
-    
     public int getAdultSpace() {
         return adultSpace;
     }

@@ -1,0 +1,15 @@
+DROP DATABASE IF EXISTS tripreservation;
+CREATE DATABASE tripreservation;
+USE tripreservation;
+
+DROP TABLE IF EXISTS hotel;
+
+CREATE TABLE hotel(
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  code INT UNSIGNED NOT NULL,
+  agentCode INT UNSIGNED NOT NULL,
+  locationCode INT UNSIGNED NOT NULL,
+  includesBreakfast INT UNSIGNED NOT NULL,
+  PRIMARY KEY(id),
+  UNIQUE KEY(code)
+) DEFAULT CHARSET=utf8;

@@ -1,6 +1,9 @@
 package hotel;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import spark.QueryParamsMap;
 
 public class TimeSlot {
     private int id;
@@ -32,5 +35,12 @@ public class TimeSlot {
 
     public boolean isBooked() {
         return isBooked;
+    }
+
+    public static TimeSlot fromQueryParams(QueryParamsMap queryMap) {
+        return TimeSlot.create(
+            LocalDate.parse(queryMap.get("availableFrom").value(), DateTimeFormatter.ISO_LOCAL_DATE),
+            LocalDate.parse(queryMap.get("availableTo").value(), DateTimeFormatter.ISO_LOCAL_DATE)
+        );
     }
 }

@@ -6,8 +6,8 @@ public class RoomTimeSlot {
     private TimeSlot timeSlot;
     private Room room;
 
-    public RoomTimeSlot(Room room) {
-        this.timeSlot = room.getTimeAvailability().stream().findFirst().get();
+    public RoomTimeSlot(Room room, TimeSlot timeSlot) {
+        this.timeSlot = timeSlot;
         this.room = room;
     }
     

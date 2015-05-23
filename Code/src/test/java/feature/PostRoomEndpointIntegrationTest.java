@@ -2,6 +2,7 @@ package feature;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import hotel.Hotel;
 import hotel.Room;
 import hotel.RoomTimeSlot;
 import hotel.TimeSlot;
@@ -15,6 +16,11 @@ import org.junit.Test;
 import spark.Spark;
 
 public class PostRoomEndpointIntegrationTest {
+    private static final String HOTEL_CODE = "1";
+    private static final String AGENT_CODE = "1";
+    private static final String LOCATION_CODE = "1";
+    private static final String INCLUDES_BREAKFAST = "true";
+
     @BeforeClass
     public static void beforeClass() throws InterruptedException {
         Application.main(null);	  
@@ -25,6 +31,22 @@ public class PostRoomEndpointIntegrationTest {
     @AfterClass
     public static void afterClass() {
         Spark.stop();
+    }
+    
+    @Test
+    public void aNewHotelShouldBeCreated() {
+        String postParams = "code=" + HOTEL_CODE + "&";
+        postParams += "agentCode=" + AGENT_CODE + "&";
+        postParams += "locationCode=" + LOCATION_CODE + "&";
+        postParams += "includesBreakfast=" + INCLUDES_BREAKFAST;
+        TestResponse res = Request.post("/hotel?" + postParams);
+        assertEquals(200, res.status);
+        Hotel hotel = Hotel.fromJsonString(res.body);
+        assertEquals(Integer.parseInt(AGENT_CODE), hotel.getAgentCode());
+        assertEquals(Integer.parseInt(HOTEL_CODE), hotel.getCode());
+        assertEquals(Integer.parseInt(LOCATION_CODE), hotel.getLocationCode());
+        assertEquals(Boolean.getBoolean(INCLUDES_BREAKFAST), hotel.includesBreakfast());
+        assertNotEquals(0, hotel.getId());
     }
 
     @Test

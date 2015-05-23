@@ -1,5 +1,7 @@
 package hotel;
 
+import com.google.gson.Gson;
+
 import spark.QueryParamsMap;
 
 public class Hotel {
@@ -46,5 +48,9 @@ public class Hotel {
             queryMap.get("agentCode").integerValue(),
             queryMap.get("locationCode").integerValue(),
             queryMap.get("includesBreakfast").booleanValue());
+    }
+
+    public static Hotel fromJsonString(String json) {
+        return new Gson().fromJson(json, Hotel.class);
     }
 }

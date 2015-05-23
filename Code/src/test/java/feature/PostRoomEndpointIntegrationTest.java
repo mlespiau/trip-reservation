@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 import hotel.Room;
-import hotel.TimeAvailability;
+import hotel.TimeSlot;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -38,11 +38,11 @@ public class PostRoomEndpointIntegrationTest {
         assertEquals(1, room.getHotel().getAgentCode());
         assertEquals(1, room.getAdultSpace());
         assertEquals(1, room.getChildrenSpace());
-        TimeAvailability timeAvailability = room.getTimeAvailability().stream().findFirst().get();
-        assertEquals("2015-12-01", timeAvailability.getFrom().toString());		
-        assertEquals("2016-01-15", timeAvailability.getTo().toString());
+        TimeSlot timeSlot = room.getTimeAvailability().stream().findFirst().get();
+        assertEquals("2015-12-01", timeSlot.getFrom().toString());		
+        assertEquals("2016-01-15", timeSlot.getTo().toString());
         // TODO: Failing test until database integration is implemented
-        assertNotEquals(0, timeAvailability.getId());
+        assertNotEquals(0, timeSlot.getId());
         assertEquals(1, room.getHotel().getLocationCode());	    		
         assertEquals(true, room.getHotel().includesBreakfast());
     }

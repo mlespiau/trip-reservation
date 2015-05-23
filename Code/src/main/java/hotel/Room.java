@@ -14,9 +14,9 @@ public class Room {
     private Hotel hotel;
     private int adultSpace;
     private int childrenSpace;
-    private Collection<TimeAvailability> availability;
+    private Collection<TimeSlot> availability;
     
-    public Room(int code, Hotel hotel, int adultSpace, int childrenSpace, Collection<TimeAvailability> availability) {
+    public Room(int code, Hotel hotel, int adultSpace, int childrenSpace, Collection<TimeSlot> availability) {
         this.code = code;
         this.hotel = hotel;
         this.adultSpace = adultSpace;
@@ -25,11 +25,11 @@ public class Room {
     }
     
     public static Room fromQueryParams(QueryParamsMap queryMap) {
-        TimeAvailability time = TimeAvailability.create(
+        TimeSlot time = TimeSlot.create(
             LocalDate.parse(queryMap.get("availableFrom").value(), DateTimeFormatter.ISO_LOCAL_DATE),
             LocalDate.parse(queryMap.get("availableTo").value(), DateTimeFormatter.ISO_LOCAL_DATE)
         );
-        Collection<TimeAvailability> availability = new ArrayList<TimeAvailability>();
+        Collection<TimeSlot> availability = new ArrayList<TimeSlot>();
         availability.add(time);
         return new Room(
             queryMap.get("code").integerValue(),
@@ -65,7 +65,7 @@ public class Room {
         return hotel;
     }
     
-    public Collection<TimeAvailability> getTimeAvailability() {
+    public Collection<TimeSlot> getTimeAvailability() {
         return availability;
     }
 }

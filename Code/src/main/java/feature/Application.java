@@ -3,7 +3,7 @@ import static serialization.Json.json;
 import static spark.Spark.post;
 import hotel.Hotel;
 import hotel.HotelService;
-import hotel.HotelServiceDao;
+import hotel.HotelDao;
 import hotel.Room;
 import hotel.RoomTimeSlot;
 import hotel.RoomTimeSlotDao;
@@ -23,7 +23,7 @@ public class Application {
                 }
             }
         );
-        HotelService hotelService = new HotelService(new HotelServiceDao() {
+        HotelService hotelService = new HotelService(new HotelDao() {
             @Override
             public int save(Hotel hotel) {
                 // TODO Auto-generated method stub

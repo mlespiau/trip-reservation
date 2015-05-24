@@ -14,6 +14,7 @@ import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 
 import test.generated.tables.Hotel;
+import test.generated.tables.Room;
 
 
 /**
@@ -29,7 +30,7 @@ import test.generated.tables.Hotel;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tripreservation extends SchemaImpl {
 
-	private static final long serialVersionUID = -2065633236;
+	private static final long serialVersionUID = 1086901762;
 
 	/**
 	 * The reference instance of <code>tripreservation</code>
@@ -52,6 +53,7 @@ public class Tripreservation extends SchemaImpl {
 
 	private final List<Table<?>> getTables0() {
 		return Arrays.<Table<?>>asList(
-			Hotel.HOTEL);
+			Hotel.HOTEL,
+			Room.ROOM);
 	}
 }

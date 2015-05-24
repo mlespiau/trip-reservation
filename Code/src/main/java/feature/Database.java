@@ -1,7 +1,9 @@
 package feature;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.jooq.Configuration;
 import org.jooq.DSLContext;
 import org.jooq.Query;
 import org.jooq.Record;
@@ -9,13 +11,15 @@ import org.jooq.Result;
 import org.jooq.ResultQuery;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import org.jooq.impl.DefaultConfiguration;
 
 import com.zaxxer.hikari.HikariDataSource;
 
 public class Database {
     private static Database instance;
-    HikariDataSource ds;
     DSLContext create;
+    Connection connection;
+    private HikariDataSource ds;
 
     public Database() {
         ds = new HikariDataSource();
@@ -23,10 +27,11 @@ public class Database {
         ds.setUsername("root");
         ds.setPassword("");
         try {
-            create = DSL.using(ds.getConnection(), SQLDialect.MYSQL);
+            connection = ds.getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        create = DSL.using(connection, SQLDialect.MYSQL);
     }
     
     public void executeQuery(String queryString) {
@@ -37,6 +42,10 @@ public class Database {
     public Result<Record> resultQuery(String queryString) {
         ResultQuery<Record> resultQuery = create.resultQuery(queryString);
         return resultQuery.fetch();
+    }
+    
+    public Configuration getConfiguraton() {
+        return new DefaultConfiguration().set(connection).set(SQLDialect.MYSQL);
     }
     
     public DSLContext getDslContext() {

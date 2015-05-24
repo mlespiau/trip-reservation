@@ -1,6 +1,6 @@
 package hotel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import org.junit.Test;
 import feature.DbRebuilder;
 
 public class HotelDaoTest {
-    HotelDao hotelDao;
+    HotelService hotelService;
     
     public HotelDaoTest() {
         DbRebuilder.getInstance().rebuild();
@@ -19,13 +19,13 @@ public class HotelDaoTest {
     
     @After
     public void tearDown() throws IOException {
-        this.hotelDao = null;
+        this.hotelService = null;
         DbRebuilder.getInstance().cleanData();
     }
 
     @Before
     public void setUp() {
-        this.hotelDao = new HotelDao();
+        this.hotelService = new HotelService();
     }
     
     @Test
@@ -46,7 +46,8 @@ public class HotelDaoTest {
     }
     
     private int saveDummyHotel(int code) {
-        return hotelDao.save(this.createDummyHotel(code));
+        Hotel hotel = hotelService.saveNew(this.createDummyHotel(code));
+        return hotel.getId();
     }
     
     private Hotel createDummyHotel(int code) {

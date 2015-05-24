@@ -3,6 +3,7 @@ package hotel;
 import com.google.gson.Gson;
 
 import spark.QueryParamsMap;
+import test.generated.tables.pojos.HotelPojo;
 
 public class Hotel {
     private int id;
@@ -52,5 +53,11 @@ public class Hotel {
 
     public static Hotel fromJsonString(String json) {
         return new Gson().fromJson(json, Hotel.class);
+    }
+
+    public static Hotel fromPojo(HotelPojo hotelPojo) {
+        Hotel hotel = new Hotel(hotelPojo.getCode().intValue(), hotelPojo.getAgentcode().intValue(), hotelPojo.getLocationcode().intValue(), (hotelPojo.getIncludesbreakfast().intValue() == 1 ? true : false));
+        hotel.setId(hotelPojo.getId().intValue());
+        return hotel;
     }
 }

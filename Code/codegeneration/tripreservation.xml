@@ -11,6 +11,9 @@
     <!-- The default code generator. You can override this one, to generate your own code style
          Defaults to org.jooq.util.DefaultGenerator -->
     <name>org.jooq.util.DefaultGenerator</name>
+    <strategy>
+        <name>framework.CustomDefaultGeneratorStrategy</name>
+    </strategy>
     <database>
       <!-- The database type. The format here is:
            org.util.[database].[database]Database -->

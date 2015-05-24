@@ -7,6 +7,7 @@ package test.generated;
 import javax.annotation.Generated;
 
 import test.generated.tables.Hotel;
+import test.generated.tables.Room;
 
 
 /**
@@ -26,4 +27,9 @@ public class Tables {
 	 * The table tripreservation.hotel
 	 */
 	public static final Hotel HOTEL = test.generated.tables.Hotel.HOTEL;
+
+	/**
+	 * The table tripreservation.room
+	 */
+	public static final Room ROOM = test.generated.tables.Room.ROOM;
 }

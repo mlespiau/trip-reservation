@@ -34,7 +34,6 @@ public class DbRebuilder {
         Database.getInstance().executeQuery(fileContent);
     }
     
-    
     public static void main(String[] args) throws IOException, SQLException {
         DbRebuilder rebuilder = new DbRebuilder();
         rebuilder.rebuild();

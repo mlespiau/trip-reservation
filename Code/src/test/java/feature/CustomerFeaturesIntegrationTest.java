@@ -30,6 +30,7 @@ public class CustomerFeaturesIntegrationTest extends ApiIntegrationTest {
     	parameters.removeCheckIn();
         TestResponse res = this.search(parameters.get());
         assertNotEquals(200, res.status);
+        assertTrue(res.body.contains("checkIn"));
     }
     
     @Test
@@ -38,6 +39,7 @@ public class CustomerFeaturesIntegrationTest extends ApiIntegrationTest {
     	parameters.removeCheckOut();
         TestResponse res = this.search(parameters.get());
         assertNotEquals(200, res.status);
+        assertTrue(res.body.contains("checkOut"));
     }
     
     @Test
@@ -46,6 +48,7 @@ public class CustomerFeaturesIntegrationTest extends ApiIntegrationTest {
     	parameters.removeAdultSpace();
         TestResponse res = this.search(parameters.get());
         assertNotEquals(200, res.status);
+        assertTrue(res.body.contains("adultSpace"));
     }
     
     @Test
@@ -54,18 +57,7 @@ public class CustomerFeaturesIntegrationTest extends ApiIntegrationTest {
     	parameters.removeChildrenSpace();
         TestResponse res = this.search(parameters.get());
         assertNotEquals(200, res.status);
-    }
-    
-    @Test
-    public void searchBetweenDatesFilterResultsAndReturnsFiveTimeSlots() {
-        Map<String, String> postParameters = new HashMap<String, String>();
-        postParameters.put("checkIn", "2014-05-28");
-        postParameters.put("checkOut", "2014-06-10");
-        TestResponse res = Request.get("/hotel/room/timeslot/search", postParameters);
-        assertEquals(200, res.status);
-        Type listType = new TypeToken<ArrayList<RoomTimeSlot>>() {}.getType();
-        List<RoomTimeSlot> timeSlotList = new Gson().fromJson(res.body, listType);
-        assertEquals(5, timeSlotList.size());
+        assertTrue(res.body.contains("childrenSpace"));
     }
 
     @Test
@@ -78,7 +70,7 @@ public class CustomerFeaturesIntegrationTest extends ApiIntegrationTest {
         assertEquals(2, timeSlotList.size());
     }
 
-    // TODO: Add input validation (checkIn < checkOut), required fields
+    // TODO: Add input validation (checkIn < checkOut)
     
     private TestResponse search(Map<String, String> postParameters) {
         // TODO: Add authentication

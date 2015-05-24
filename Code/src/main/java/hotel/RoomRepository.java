@@ -2,6 +2,7 @@ package hotel;
 
 import static test.generated.tables.Hotel.HOTEL;
 import static test.generated.tables.Room.ROOM;
+import framework.DaoException;
 import framework.Database;
 
 import org.jooq.Record;
@@ -18,6 +19,9 @@ public class RoomRepository {
             and(ROOM.CODE.equal(UInteger.valueOf(roomCode))).
             and(HOTEL.AGENTCODE.equal(UInteger.valueOf(agentCode))).
             fetchOne();
+        if (record.size() < 1) {
+            throw new DaoException("roomDoesNotExistsOrAgentDoesNotHaveAccessException");
+        }
         Hotel hotel = Hotel.fromPojo(record.into(HotelPojo.class));
         Room room = new Room(
             record.getValue(ROOM.CODE).intValue(),

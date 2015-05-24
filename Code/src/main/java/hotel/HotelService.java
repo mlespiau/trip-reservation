@@ -5,6 +5,7 @@ import org.jooq.types.UInteger;
 
 import test.generated.Tables;
 import test.generated.tables.records.HotelRecord;
+import framework.DaoException;
 import framework.Database;
 
 public class HotelService {
@@ -24,7 +25,7 @@ public class HotelService {
         try {
             hotelRecord.store();
         } catch (DataAccessException e) {
-            throw new HotelDaoException(e);
+            throw new DaoException(e);
         }
         return hotelRecord.getId().intValue();
     }

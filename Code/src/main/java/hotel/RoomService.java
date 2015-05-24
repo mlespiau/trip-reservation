@@ -1,12 +1,12 @@
 package hotel;
 
-import framework.Database;
-
 import org.jooq.exception.DataAccessException;
 import org.jooq.types.UInteger;
 
 import test.generated.Tables;
 import test.generated.tables.records.RoomRecord;
+import framework.DaoException;
+import framework.Database;
 
 public class RoomService {
 
@@ -25,7 +25,7 @@ public class RoomService {
         try {
             roomRecord.store();
         } catch (DataAccessException e) {
-            throw new RoomDaoException(e);
+            throw new DaoException(e);
         }
         return roomRecord.getId().intValue();
     }

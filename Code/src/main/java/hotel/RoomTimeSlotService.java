@@ -7,6 +7,7 @@ import org.jooq.types.UInteger;
 
 import test.generated.Tables;
 import test.generated.tables.records.RoomtimeslotRecord;
+import framework.DaoException;
 import framework.Database;
 
 
@@ -24,11 +25,10 @@ public class RoomTimeSlotService {
         roomTimeSlotRecord.setFromdate(Date.valueOf(roomTimeSlot.getTimeSlot().getFrom()));
         roomTimeSlotRecord.setTodate(Date.valueOf(roomTimeSlot.getTimeSlot().getTo()));
         roomTimeSlotRecord.setRoomid(UInteger.valueOf(roomTimeSlot.getRoom().getId()));
-        // TODO: Fix save method in all DAOs (error handling)
         try {
             roomTimeSlotRecord.store();
         } catch (DataAccessException e) {
-            throw new RoomDaoException(e);
+            throw new DaoException(e);
         }
         return roomTimeSlotRecord.getId().intValue();
     }

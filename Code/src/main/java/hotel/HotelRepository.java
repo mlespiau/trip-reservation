@@ -5,6 +5,7 @@ import static test.generated.tables.Hotel.HOTEL;
 import org.jooq.types.UInteger;
 
 import test.generated.tables.pojos.HotelPojo;
+import framework.DaoException;
 import framework.Database;
 
 public class HotelRepository {
@@ -16,7 +17,7 @@ public class HotelRepository {
                 and(HOTEL.AGENTCODE.equal(UInteger.valueOf(agentCode))).
                 fetchOne().into(HotelPojo.class);
         if (hotelPojo == null) {
-            throw new HotelDaoException("hotelDoesNotExistsOrAgentDoesNotHaveAccessException");
+            throw new DaoException("hotelDoesNotExistsOrAgentDoesNotHaveAccessException");
         }
         return Hotel.fromPojo(hotelPojo);
     }

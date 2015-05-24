@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import feature.DbRebuilder;
+import framework.DaoException;
 
 public class HotelDaoTest {
     HotelService hotelService;
@@ -39,7 +40,7 @@ public class HotelDaoTest {
         assertEquals(2, this.saveDummyHotel(2));
     }
     
-    @Test(expected=HotelDaoException.class)
+    @Test(expected=DaoException.class)
     public void testSaveSameHotelTwiceThrowsException() {
         this.saveDummyHotel(1);
         this.saveDummyHotel(1);

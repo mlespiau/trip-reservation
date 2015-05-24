@@ -1,14 +1,12 @@
 package integration;
 import static org.junit.Assert.fail;
 
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
-
 
 import spark.utils.IOUtils;
 
@@ -45,7 +43,12 @@ public class Request {
             connection.setRequestMethod(method);
             connection.setDoOutput(true);
             connection.connect();
-            String body = IOUtils.toString(connection.getInputStream());
+            String body;
+            if (connection.getResponseCode() > 400) {
+                body = IOUtils.toString(connection.getErrorStream());
+            } else {
+                body = IOUtils.toString(connection.getInputStream());
+            }
             return new TestResponse(connection.getResponseCode(), body);
         } catch (IOException e) {
             e.printStackTrace();

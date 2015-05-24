@@ -2,6 +2,7 @@ package feature;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import framework.ApiError;
 import hotel.Hotel;
 import hotel.HotelService;
 import hotel.Room;
@@ -20,6 +21,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import spark.Spark;
+
+import com.google.gson.Gson;
 
 public class HotelAgentFeaturesIntegrationTest extends ApiIntegrationTest {
     private static final String HOTEL_CODE = "1";
@@ -107,5 +110,18 @@ public class HotelAgentFeaturesIntegrationTest extends ApiIntegrationTest {
         assertEquals(true, room.getHotel().includesBreakfast());
     }
     
-    // TODO: Add tests for unauthorized access to this endpoints
+    @Test
+    public void aUnauthorizedErrorShouldOcurr() {
+        Map<String, String> postParameters = new HashMap<String, String>();
+        this.testUnauthorizedErrorOccursForEndPoints("/hotel", postParameters);
+        this.testUnauthorizedErrorOccursForEndPoints("/hotel/room", postParameters);
+        this.testUnauthorizedErrorOccursForEndPoints("/hotel/room/timeslot", postParameters);
+    }
+    
+    private void testUnauthorizedErrorOccursForEndPoints(String endPoint, Map<String, String> postParameters) {
+        TestResponse res = Request.post(endPoint, postParameters);
+        assertEquals(401, res.status);
+        ApiError error = new Gson().fromJson(res.body, ApiError.class);
+        assertEquals("Unauthorized. User is not authenticated.", error.getMessage());
+    }
 }

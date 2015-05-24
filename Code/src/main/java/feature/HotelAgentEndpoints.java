@@ -1,7 +1,9 @@
 package feature;
 
 import static serialization.Json.json;
+import static spark.Spark.exception;
 import static spark.Spark.post;
+import framework.ApiError;
 import hotel.Hotel;
 import hotel.HotelRepository;
 import hotel.HotelService;
@@ -12,6 +14,11 @@ import hotel.RoomTimeSlotService;
 import hotel.TimeSlot;
 import security.AuthorizationService;
 import security.HotelAgent;
+import security.InvalidUserException;
+
+import com.google.gson.Gson;
+
+
 
 public class HotelAgentEndpoints {
     public HotelAgentEndpoints(final AuthorizationService authorizationService, 
@@ -42,5 +49,10 @@ public class HotelAgentEndpoints {
                 TimeSlot.fromQueryParams(req.queryMap())
             );
         }, json());
+        exception(InvalidUserException.class, (e, request, response) -> {
+            response.status(401);
+            Gson gson = new Gson();
+            response.body(gson.toJson(new ApiError("Unauthorized. User is not authenticated.")));
+        });
     }
 }

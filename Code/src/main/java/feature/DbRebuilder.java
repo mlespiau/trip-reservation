@@ -17,25 +17,21 @@ public class DbRebuilder {
     }
     
     public void rebuild() {
-        String dumpFilePath = getClass().getClassLoader().getResource("dump.sql").getFile();
-        String dump;
-        try {
-            dump = new String(Files.readAllBytes(Paths.get(dumpFilePath)));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Database.getInstance().executeQuery(dump);
+        this.executeSqlFile(getClass().getClassLoader().getResource("dump.sql").getFile());
     }
     
     public void cleanData() {
-        String truncateFilePath = getClass().getClassLoader().getResource("truncate.sql").getFile();
-        String truncate;
+        this.executeSqlFile(getClass().getClassLoader().getResource("truncate.sql").getFile());
+    }
+    
+    private void executeSqlFile(String filePath) {
+        String fileContent;
         try {
-            truncate = new String(Files.readAllBytes(Paths.get(truncateFilePath)));
+            fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Database.getInstance().executeQuery(truncate);
+        Database.getInstance().executeQuery(fileContent);
     }
     
     

@@ -1,6 +1,6 @@
 package feature;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import hotel.RoomTimeSlot;
 import integration.ApiIntegrationTest;
 import integration.Request;
@@ -25,13 +25,113 @@ public class CustomerFeaturesIntegrationTest extends ApiIntegrationTest {
     }
     
     @Test
-    public void searchWithoutFiltersShouldReturnAllTimeSlots() {
+    public void searchCheckInParameterIsRequired() {
+    	SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
+    	parameters.removeCheckIn();
+        TestResponse res = this.search(parameters.get());
+        assertNotEquals(200, res.status);
+    }
+    
+    @Test
+    public void searchCheckOutParameterIsRequired() {
+    	SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
+    	parameters.removeCheckOut();
+        TestResponse res = this.search(parameters.get());
+        assertNotEquals(200, res.status);
+    }
+    
+    @Test
+    public void searchAdultSpaceParameterIsRequired() {
+    	SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
+    	parameters.removeAdultSpace();
+        TestResponse res = this.search(parameters.get());
+        assertNotEquals(200, res.status);
+    }
+    
+    @Test
+    public void searchChildrenSpaceParameterIsRequired() {
+    	SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
+    	parameters.removeChildrenSpace();
+        TestResponse res = this.search(parameters.get());
+        assertNotEquals(200, res.status);
+    }
+    
+    @Test
+    public void searchBetweenDatesFilterResultsAndReturnsFiveTimeSlots() {
         Map<String, String> postParameters = new HashMap<String, String>();
-        // TODO: Add authentication
+        postParameters.put("checkIn", "2014-05-28");
+        postParameters.put("checkOut", "2014-06-10");
         TestResponse res = Request.get("/hotel/room/timeslot/search", postParameters);
         assertEquals(200, res.status);
         Type listType = new TypeToken<ArrayList<RoomTimeSlot>>() {}.getType();
         List<RoomTimeSlot> timeSlotList = new Gson().fromJson(res.body, listType);
-        assertEquals(1000, timeSlotList.size());
+        assertEquals(5, timeSlotList.size());
+    }
+
+    @Test
+    public void searchBetweenDatesAndRoomSizeReturnsTwoTimeSlot() {
+    	SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
+        TestResponse res = this.search(parameters.get());
+        assertEquals(200, res.status);
+        Type listType = new TypeToken<ArrayList<RoomTimeSlot>>() {}.getType();
+        List<RoomTimeSlot> timeSlotList = new Gson().fromJson(res.body, listType);
+        assertEquals(2, timeSlotList.size());
+    }
+
+    // TODO: Add input validation (checkIn < checkOut), required fields
+    
+    private TestResponse search(Map<String, String> postParameters) {
+        // TODO: Add authentication
+        return Request.get("/hotel/room/timeslot/search", postParameters);
+    }
+    
+    private static class SearchParameterBuilder {
+    	private Map<String, String> parameters = new HashMap<String, String>();
+
+    	public void addCheckIn() {
+    		parameters.put("checkIn", "2014-05-28");
+    	}
+    	
+		public void removeCheckIn() {
+			parameters.remove("checkIn");
+		}
+
+		public void addCheckOut() {
+    		parameters.put("checkOut", "2014-06-10");
+    	}
+
+    	public void removeCheckOut() {
+			parameters.remove("checkOut");
+		}
+
+    	public void addAdultSpace() {
+            parameters.put("adultSpace", "2");
+    	}
+    	
+		public void removeAdultSpace() {
+			parameters.remove("adultSpace");
+		}
+
+    	public void addChildrenSpace() {
+    		parameters.put("childrenSpace", "0");
+    	}
+    	
+    	public void removeChildrenSpace() {
+    		parameters.remove("childrenSpace");
+    	}
+    	
+    	public Map<String, String> get() {
+    		return parameters;
+    	}
+    	
+    	public static SearchParameterBuilder createDefault() {
+    		SearchParameterBuilder instance = new SearchParameterBuilder();
+    		instance.addCheckIn();
+    		instance.addCheckOut();
+    		instance.addAdultSpace();
+    		instance.addChildrenSpace();
+    		return instance;
+    	}
     }
 }
+

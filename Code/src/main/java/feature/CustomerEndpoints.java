@@ -2,6 +2,7 @@ package feature;
 
 import static serialization.Json.json;
 import static spark.Spark.get;
+import hotel.RoomSearchSpecification;
 import hotel.RoomTimeSlotRepository;
 import security.AuthorizationService;
 
@@ -11,8 +12,8 @@ public class CustomerEndpoints {
         get("/hotel/room/timeslot/search", (req, res) -> {
 //            HotelAgent hotelAgent = authorizationService.createHotelAgentFromRequest(req);
 //            return hotelService.saveNew(Hotel.fromQueryParams(req.queryMap(), hotelAgent));
-            
-            return roomTimeSlotRepository.find();
+            RoomSearchSpecification roomSearchSpecification = RoomSearchSpecification.fromQueryParams(req.queryMap());
+            return roomTimeSlotRepository.find(roomSearchSpecification);
         }, json());
     }
 

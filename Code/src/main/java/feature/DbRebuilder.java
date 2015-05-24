@@ -28,6 +28,7 @@ public class DbRebuilder {
         this.executeSqlFile(getClass().getClassLoader().getResource("test-data/hotel.sql").getFile());
         this.executeSqlFile(getClass().getClassLoader().getResource("test-data/room.sql").getFile());
         this.executeSqlFile(getClass().getClassLoader().getResource("test-data/roomTimeSlot.sql").getFile());
+        Database.getInstance().executeQuery("UPDATE roomTimeSlot SET toDate = INTERVAL 15 DAY + fromDate;");
     }
     
     private void executeSqlFile(String filePath) {

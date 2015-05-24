@@ -8,22 +8,20 @@ import hotel.Room;
 import hotel.RoomService;
 import hotel.RoomTimeSlot;
 import hotel.TimeSlot;
+import integration.ApiIntegrationTest;
 import integration.Request;
 import integration.TestResponse;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import spark.Spark;
 
-public class HotelAgentFeaturesIntegrationTest {
+public class HotelAgentFeaturesIntegrationTest extends ApiIntegrationTest {
     private static final String HOTEL_CODE = "1";
     private static final String HOTEL_CODE_CREATE = "2";
     private static final String AGENT_CODE = "1";
@@ -34,18 +32,6 @@ public class HotelAgentFeaturesIntegrationTest {
     private static final String ADULT_SPACE = "1";
     private static final String CHILDREN_SPACE = "0";
     private static final String AGENT_TOKEN = "someSecurityToken";
-
-    @BeforeClass
-    public static void beforeClass() throws InterruptedException {
-        DbRebuilder.getInstance().rebuild();
-        Application.main(null);
-        Spark.awaitInitialization();
-    }
-    
-    @After
-    public void tearDown() throws IOException {
-        DbRebuilder.getInstance().cleanData();
-    }
 
     @Before
     public void setUp() {

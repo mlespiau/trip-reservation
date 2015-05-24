@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotEquals;
 import hotel.Hotel;
 import hotel.HotelService;
 import hotel.Room;
-import hotel.RoomDao;
 import hotel.RoomService;
 import hotel.RoomTimeSlot;
 import hotel.TimeSlot;
@@ -51,7 +50,7 @@ public class HotelAgentFeaturesIntegrationTest {
     public void setUp() {
         HotelService hotelService = new HotelService();
         Hotel hotel = hotelService.saveNew(new Hotel(1, 1, 1, true));
-        RoomService roomService = new RoomService(new RoomDao());
+        RoomService roomService = new RoomService();
         roomService.saveNew(new Room(1, hotel, 1, 1));
     }
     

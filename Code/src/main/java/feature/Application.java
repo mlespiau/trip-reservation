@@ -2,7 +2,6 @@ package feature;
 
 import hotel.HotelRepository;
 import hotel.HotelService;
-import hotel.RoomDao;
 import hotel.RoomRepository;
 import hotel.RoomService;
 import security.AuthorizationService;
@@ -12,7 +11,7 @@ public class Application {
     public static void main(String[] args) {
         new HotelAgentEndpoints(new AuthorizationService(),
             new HotelService(),
-            new RoomService(new RoomDao()),
+            new RoomService(),
             new HotelRepository(),
             new RoomRepository());
     }

@@ -11,9 +11,8 @@ import hotel.RoomTimeSlotService;
 import hotel.TimeSlot;
 
 public class HotelAgentEndpoints {
-    public HotelAgentEndpoints(final HotelService hotelService, final RoomService roomService) {
+    public HotelAgentEndpoints(final HotelService hotelService, final RoomService roomService, final HotelRepository hotelRepository) {
         RoomTimeSlotService roomTimeSlotService = new RoomTimeSlotService();
-        HotelRepository hotelRepository = new HotelRepository();
         RoomRepository roomRepository = new RoomRepository();
         post("/hotel", (req, res) -> hotelService.saveNew(Hotel.fromQueryParams(req.queryMap())), json());
         // TODO: here we need some validations hotel should 

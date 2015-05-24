@@ -1,5 +1,7 @@
 package hotel;
 
+import org.jooq.Record;
+
 import com.google.gson.Gson;
 
 import security.HotelAgent;
@@ -60,5 +62,9 @@ public class Hotel {
         Hotel hotel = new Hotel(hotelPojo.getCode().intValue(), hotelPojo.getAgentcode().intValue(), hotelPojo.getLocationcode().intValue(), (hotelPojo.getIncludesbreakfast().intValue() == 1 ? true : false));
         hotel.setId(hotelPojo.getId().intValue());
         return hotel;
+    }
+
+    public static Hotel fromRecord(Record record) {
+        return Hotel.fromPojo(record.into(HotelPojo.class));
     }
 }

@@ -16,11 +16,8 @@ import integration.TestResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-
-import spark.Spark;
 
 import com.google.gson.Gson;
 
@@ -42,11 +39,6 @@ public class HotelAgentFeaturesIntegrationTest extends ApiIntegrationTest {
         Hotel hotel = hotelService.saveNew(new Hotel(1, 1, 1, true));
         RoomService roomService = new RoomService();
         roomService.saveNew(new Room(1, hotel, 1, 1));
-    }
-    
-    @AfterClass
-    public static void afterClass() {
-        Spark.stop();
     }
 
     @Test

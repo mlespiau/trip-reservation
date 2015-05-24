@@ -28,6 +28,14 @@ public class Request {
         }
     }
     
+    public static TestResponse get(String path, Map<String, String> parameters) {
+        String postParameters = "?" + parameters.entrySet()
+            .stream().map(p -> urlEncodeUTF8(p.getKey()) + "=" + urlEncodeUTF8(p.getValue()))
+            .reduce((p1, p2) -> p1 + "&" + p2)
+            .orElse("");
+        return request("GET", path + postParameters);
+    }
+    
     public static TestResponse post(String path, Map<String, String> parameters) {
         String postParameters = "?" + parameters.entrySet()
             .stream().map(p -> urlEncodeUTF8(p.getKey()) + "=" + urlEncodeUTF8(p.getValue()))

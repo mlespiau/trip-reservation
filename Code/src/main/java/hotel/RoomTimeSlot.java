@@ -1,5 +1,9 @@
 package hotel;
 
+import org.jooq.Record;
+
+import test.generated.tables.pojos.RoomtimeslotPojo;
+
 import com.google.gson.Gson;
 
 public class RoomTimeSlot {
@@ -30,5 +34,12 @@ public class RoomTimeSlot {
 
     public static RoomTimeSlot fromJsonString(String json) {
         return new Gson().fromJson(json, RoomTimeSlot.class);
+    }
+
+    public static RoomTimeSlot fromRecord(Record record) {
+        Room room = Room.fromRecord(record);
+        RoomtimeslotPojo pojo = record.into(RoomtimeslotPojo.class);
+        TimeSlot timeSlot = TimeSlot.create(pojo.getFromdate().toLocalDate(), pojo.getTodate().toLocalDate());
+        return new RoomTimeSlot(room, timeSlot);
     }
 }

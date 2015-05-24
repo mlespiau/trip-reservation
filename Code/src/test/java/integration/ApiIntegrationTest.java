@@ -3,6 +3,7 @@ package integration;
 import java.io.IOException;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 import spark.Spark;
@@ -16,6 +17,11 @@ public class ApiIntegrationTest {
         DbRebuilder.getInstance().rebuild();
         Application.main(null);
         Spark.awaitInitialization();
+    }
+    
+    @AfterClass
+    public static void afterClass() {
+        Spark.stop();
     }
     
     @After

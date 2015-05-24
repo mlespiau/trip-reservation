@@ -24,6 +24,12 @@ public class DbRebuilder {
         this.executeSqlFile(getClass().getClassLoader().getResource("truncate.sql").getFile());
     }
     
+    public void createFakeDataForTests() {
+        this.executeSqlFile(getClass().getClassLoader().getResource("test-data/hotel.sql").getFile());
+        this.executeSqlFile(getClass().getClassLoader().getResource("test-data/room.sql").getFile());
+        this.executeSqlFile(getClass().getClassLoader().getResource("test-data/roomTimeSlot.sql").getFile());
+    }
+    
     private void executeSqlFile(String filePath) {
         String fileContent;
         try {
@@ -37,5 +43,6 @@ public class DbRebuilder {
     public static void main(String[] args) throws IOException, SQLException {
         DbRebuilder rebuilder = new DbRebuilder();
         rebuilder.rebuild();
+        rebuilder.createFakeDataForTests();
     }
 }

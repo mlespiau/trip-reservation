@@ -1,8 +1,11 @@
 package hotel;
 
+import org.jooq.Record;
+
 import com.google.gson.Gson;
 
 import spark.QueryParamsMap;
+import test.generated.tables.pojos.RoomPojo;
 
 public class Room {
     private int code;
@@ -53,5 +56,13 @@ public class Room {
     
     public void setId(int id) {
         this.id = id;
+    }
+
+    public static Room fromRecord(Record record) {
+        Hotel hotel = Hotel.fromRecord(record);
+        RoomPojo roomPojo = record.into(RoomPojo.class);
+        Room room =  new Room(roomPojo.getCode().intValue(), hotel, roomPojo.getAdultspace().intValue(), roomPojo.getChildrenspace().intValue());
+        room.setId(roomPojo.getId().intValue());
+        return room;
     }
 }

@@ -12,8 +12,7 @@ import hotel.RoomTimeSlotService;
 import hotel.TimeSlot;
 
 public class HotelAgentEndpoints {
-    public HotelAgentEndpoints() {
-        HotelService hotelService = new HotelService();
+    public HotelAgentEndpoints(final HotelService hotelService) {
         RoomService roomService = new RoomService(new RoomDao());
         RoomTimeSlotService roomTimeSlotService = new RoomTimeSlotService();
         HotelRepository hotelRepository = new HotelRepository();

@@ -3,16 +3,20 @@ package feature;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import hotel.Hotel;
+import hotel.HotelService;
 import hotel.Room;
 import hotel.RoomTimeSlot;
 import hotel.TimeSlot;
 import integration.Request;
 import integration.TestResponse;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -33,7 +37,16 @@ public class HotelAgentFeaturesIntegrationTest {
         Application.main(null);
         Spark.awaitInitialization();
     }
+    
+    @After
+    public void tearDown() throws IOException {
+        DbRebuilder.getInstance().cleanData();
+    }
 
+    @Before
+    public void setUp() {
+    }
+    
     @AfterClass
     public static void afterClass() {
         Spark.stop();
@@ -58,6 +71,8 @@ public class HotelAgentFeaturesIntegrationTest {
 
     @Test
     public void aNewRoomShouldBeCreated() {
+        HotelService hotelService = new HotelService();
+        hotelService.saveNew(new Hotel(1, 1, 1, true));
         Map<String, String> postParameters = new HashMap<String, String>();
         postParameters.put("code", ROOM_CODE);
         postParameters.put("hotelCode", HOTEL_CODE);
@@ -69,7 +84,7 @@ public class HotelAgentFeaturesIntegrationTest {
         assertEquals(Integer.parseInt(ROOM_CODE), room.getCode());
         assertEquals(Integer.parseInt(HOTEL_CODE), room.getHotel().getCode());
         assertEquals(Integer.parseInt(ADULT_SPACE), room.getAdultSpace());
-        assertEquals(Boolean.getBoolean(CHILDREN_SPACE), room.getChildrenSpace());
+        assertEquals(Integer.parseInt(CHILDREN_SPACE), room.getChildrenSpace());
         assertNotEquals(0, room.getId());
     }
     

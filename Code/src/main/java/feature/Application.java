@@ -24,7 +24,7 @@ public class Application {
             }
         );
         HotelService hotelService = new HotelService(new HotelDao());
-        post("/hotel", (req, res) -> hotelService.create(Hotel.fromQueryParams(req.queryMap())), json());
+        post("/hotel", (req, res) -> hotelService.saveNew(Hotel.fromQueryParams(req.queryMap())), json());
         post("/room/timeslot", (req, res) -> roomTimeSlotService.create(
             Room.fromQueryParams(req.queryMap()),
             TimeSlot.fromQueryParams(req.queryMap())

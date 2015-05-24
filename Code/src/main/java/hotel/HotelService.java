@@ -7,7 +7,7 @@ public class HotelService {
         this.hotelDao = hotelDao; 
     }
     
-    public Hotel create(Hotel hotel) {
+    public Hotel saveNew(Hotel hotel) {
         int id = this.hotelDao.save(hotel);
         hotel.setId(id);
         return hotel;

@@ -122,4 +122,5 @@ public class HotelAgentFeaturesIntegrationTest {
         assertEquals(true, room.getHotel().includesBreakfast());
     }
     
+    // TODO: Add tests for unauthorized access to this endpoints
 }

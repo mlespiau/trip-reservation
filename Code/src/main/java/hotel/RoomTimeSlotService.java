@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.jooq.exception.DataAccessException;
 import org.jooq.types.UInteger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import test.generated.Tables;
 import test.generated.tables.records.RoomtimeslotRecord;
@@ -12,6 +14,7 @@ import framework.Database;
 
 
 public class RoomTimeSlotService {
+    Logger logger = LoggerFactory.getLogger(getClass()); 
 
     public RoomTimeSlot create(Room room, TimeSlot timeSlot) {
         RoomTimeSlot roomTimeSlot = new RoomTimeSlot(room, timeSlot);
@@ -28,6 +31,7 @@ public class RoomTimeSlotService {
         try {
             roomTimeSlotRecord.store();
         } catch (DataAccessException e) {
+            logger.info("errorSavingTimeSlotService", e);
             throw new DaoException(e);
         }
         return roomTimeSlotRecord.getId().intValue();

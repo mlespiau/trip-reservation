@@ -2,6 +2,8 @@ package hotel;
 
 import org.jooq.exception.DataAccessException;
 import org.jooq.types.UInteger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import test.generated.Tables;
 import test.generated.tables.records.HotelRecord;
@@ -9,7 +11,8 @@ import framework.DaoException;
 import framework.Database;
 
 public class HotelService {
-    
+    Logger logger = LoggerFactory.getLogger(getClass()); 
+
     public Hotel saveNew(Hotel hotel) {
         int id = this.save(hotel);
         hotel.setId(id);
@@ -25,6 +28,7 @@ public class HotelService {
         try {
             hotelRecord.store();
         } catch (DataAccessException e) {
+            logger.info("errorSavingHotel", e);
             throw new DaoException(e);
         }
         return hotelRecord.getId().intValue();

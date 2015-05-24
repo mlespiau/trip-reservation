@@ -16,8 +16,7 @@ public class HotelRepository {
                 and(HOTEL.AGENTCODE.equal(UInteger.valueOf(agentCode))).
                 fetchOne().into(HotelPojo.class);
         if (hotelPojo == null) {
-            // TODO: type exception
-            throw new RuntimeException("hotelDoesNotExistsOrAgentDoesNotHaveAccessException");
+            throw new HotelDaoException("hotelDoesNotExistsOrAgentDoesNotHaveAccessException");
         }
         return Hotel.fromPojo(hotelPojo);
     }

@@ -7,5 +7,9 @@ public class HotelDaoException extends RuntimeException {
     public HotelDaoException(Exception e) {
         super(e);
     }
+    
+    public HotelDaoException(String message) {
+        super(message);
+    }
 
 }

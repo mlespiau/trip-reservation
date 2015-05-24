@@ -2,6 +2,7 @@ package hotel;
 
 import com.google.gson.Gson;
 
+import security.HotelAgent;
 import spark.QueryParamsMap;
 import test.generated.tables.pojos.HotelPojo;
 
@@ -43,10 +44,10 @@ public class Hotel {
         this.id = id;
     }
 
-    public static Hotel fromQueryParams(QueryParamsMap queryMap) {
+    public static Hotel fromQueryParams(QueryParamsMap queryMap, HotelAgent hotelAgent) {
         return new Hotel(
             queryMap.get("code").integerValue(),
-            queryMap.get("agentCode").integerValue(),
+            hotelAgent.getCode(),
             queryMap.get("locationCode").integerValue(),
             queryMap.get("includesBreakfast").booleanValue());
     }

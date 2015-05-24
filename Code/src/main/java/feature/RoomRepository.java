@@ -11,11 +11,12 @@ import org.jooq.types.UInteger;
 
 public class RoomRepository {
 
-    public Room findByCode(int hotelId, int roomCode) {
+    public Room findByCode(int hotelId, int roomCode, int agentCode) {
         Record record = Database.getInstance().getDslContext().
             select().from(ROOM.join(HOTEL).on(ROOM.HOTELID.equal(HOTEL.ID))).
             where(ROOM.HOTELID.equal(UInteger.valueOf(hotelId))).
             and(ROOM.CODE.equal(UInteger.valueOf(roomCode))).
+            and(HOTEL.AGENTCODE.equal(UInteger.valueOf(agentCode))).
             fetchOne();
         Hotel hotel = new Hotel(
             record.getValue(HOTEL.CODE).intValue(),

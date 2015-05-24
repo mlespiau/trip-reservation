@@ -1,12 +1,11 @@
 package hotel;
 
-import framework.Database;
-
 import org.jooq.exception.DataAccessException;
 import org.jooq.types.UInteger;
 
 import test.generated.Tables;
 import test.generated.tables.records.HotelRecord;
+import framework.Database;
 
 public class HotelService {
     
@@ -19,8 +18,6 @@ public class HotelService {
         return hotel;
     }
     
- // TODO: Verify the hotel does not exists
- // TODO: Verify the agentCode exists
     private int save(Hotel hotel) {
         HotelRecord hotelRecord = Database.getInstance().getDslContext().newRecord(Tables.HOTEL);
         hotelRecord.setCode(UInteger.valueOf(hotel.getCode()));

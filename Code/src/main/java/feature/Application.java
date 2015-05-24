@@ -4,11 +4,15 @@ import hotel.HotelRepository;
 import hotel.HotelService;
 import hotel.RoomDao;
 import hotel.RoomService;
+import security.AuthorizationService;
 
 public class Application {
-    // TODO: agentCode should be part of the authentication API and be accessible if the user is an hotel agent
-    // TODO: same with customerCode and systemAdminCode
+    // TODO: agentCode, customerCode and systemAdminCode should be part of the authentication API and be accessible from the user object
     public static void main(String[] args) {
-        new HotelAgentEndpoints(new HotelService(), new RoomService(new RoomDao()), new HotelRepository(), new RoomRepository());
+        new HotelAgentEndpoints(new AuthorizationService(),
+            new HotelService(),
+            new RoomService(new RoomDao()),
+            new HotelRepository(),
+            new RoomRepository());
     }
 }

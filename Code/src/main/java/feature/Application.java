@@ -23,13 +23,7 @@ public class Application {
                 }
             }
         );
-        HotelService hotelService = new HotelService(new HotelDao() {
-            @Override
-            public int save(Hotel hotel) {
-                // TODO Auto-generated method stub
-                return 0;
-            }
-        });
+        HotelService hotelService = new HotelService(new HotelDao());
         post("/hotel", (req, res) -> hotelService.create(Hotel.fromQueryParams(req.queryMap())), json());
         post("/room/timeslot", (req, res) -> roomTimeSlotService.create(
             Room.fromQueryParams(req.queryMap()),

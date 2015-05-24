@@ -11,5 +11,5 @@ CREATE TABLE hotel(
   locationCode INT UNSIGNED NOT NULL,
   includesBreakfast INT UNSIGNED NOT NULL,
   PRIMARY KEY(id),
-  UNIQUE KEY(code)
+  UNIQUE KEY(code, agentCode)
 ) DEFAULT CHARSET=utf8;

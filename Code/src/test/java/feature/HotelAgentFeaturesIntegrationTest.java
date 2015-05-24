@@ -23,19 +23,22 @@ public class HotelAgentFeaturesIntegrationTest {
     private static final String AGENT_CODE = "1";
     private static final String LOCATION_CODE = "1";
     private static final String INCLUDES_BREAKFAST = "true";
+    private static final String ROOM_CODE = "1";
+    private static final String ADULT_SPACE = "1";
+    private static final String CHILDREN_SPACE = "0";
 
     @BeforeClass
     public static void beforeClass() throws InterruptedException {
-        Application.main(null);	  
-        // TODO: Remove this hack, this code should hook to an onServerReady event and launch tests afterwards
-        Thread.sleep(500);
+        DbRebuilder.getInstance().rebuild();
+        Application.main(null);
+        Spark.awaitInitialization();
     }
 
     @AfterClass
     public static void afterClass() {
         Spark.stop();
     }
-    
+
     @Test
     public void aNewHotelShouldBeCreated() {
         Map<String, String> postParameters = new HashMap<String, String>();
@@ -49,12 +52,29 @@ public class HotelAgentFeaturesIntegrationTest {
         assertEquals(Integer.parseInt(AGENT_CODE), hotel.getAgentCode());
         assertEquals(Integer.parseInt(HOTEL_CODE), hotel.getCode());
         assertEquals(Integer.parseInt(LOCATION_CODE), hotel.getLocationCode());
-        assertEquals(Boolean.getBoolean(INCLUDES_BREAKFAST), hotel.includesBreakfast());
+        assertEquals(Boolean.valueOf(INCLUDES_BREAKFAST).booleanValue(), hotel.includesBreakfast());
         assertNotEquals(0, hotel.getId());
     }
 
     @Test
     public void aNewRoomShouldBeCreated() {
+        Map<String, String> postParameters = new HashMap<String, String>();
+        postParameters.put("code", ROOM_CODE);
+        postParameters.put("hotelCode", HOTEL_CODE);
+        postParameters.put("adultSpace", ADULT_SPACE);
+        postParameters.put("childrenSpace", CHILDREN_SPACE);
+        TestResponse res = Request.post("/hotel/room", postParameters);
+        assertEquals(200, res.status);
+        Room room = Room.fromJsonString(res.body);
+        assertEquals(Integer.parseInt(ROOM_CODE), room.getCode());
+        assertEquals(Integer.parseInt(HOTEL_CODE), room.getHotel().getCode());
+        assertEquals(Integer.parseInt(ADULT_SPACE), room.getAdultSpace());
+        assertEquals(Boolean.getBoolean(CHILDREN_SPACE), room.getChildrenSpace());
+        assertNotEquals(0, room.getId());
+    }
+    
+        @Test
+    public void aNewRoomTimeSlotShouldBeCreated() {
         TestResponse res = Request.post("/room/timeslot?code=1&hotelCode=1&adultSpace=1&childrenSpace=1&availableFrom=2015-12-01&availableTo=2016-01-15&locationCode=1&includesBreakfast=true&agentCode=1");
         RoomTimeSlot roomTimeSlot = RoomTimeSlot.fromJsonString(res.body);
         Room room = roomTimeSlot.getRoom();

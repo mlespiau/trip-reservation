@@ -3,6 +3,7 @@ package feature;
 import hotel.HotelRepository;
 import hotel.HotelService;
 import hotel.RoomDao;
+import hotel.RoomRepository;
 import hotel.RoomService;
 import security.AuthorizationService;
 

@@ -6,6 +6,7 @@ import hotel.Hotel;
 import hotel.HotelRepository;
 import hotel.HotelService;
 import hotel.Room;
+import hotel.RoomRepository;
 import hotel.RoomService;
 import hotel.RoomTimeSlotService;
 import hotel.TimeSlot;

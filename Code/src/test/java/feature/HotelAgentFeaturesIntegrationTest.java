@@ -102,7 +102,6 @@ public class HotelAgentFeaturesIntegrationTest extends ApiIntegrationTest {
         assertEquals(1, room.getChildrenSpace());
         assertEquals("2015-12-01", timeSlot.getFrom().toString());
         assertEquals("2016-01-15", timeSlot.getTo().toString());
-        // TODO: Failing test until database integration is implemented
         assertNotEquals(0, roomTimeSlot.getId());
         assertEquals(1, room.getHotel().getLocationCode());
         assertEquals(true, room.getHotel().includesBreakfast());

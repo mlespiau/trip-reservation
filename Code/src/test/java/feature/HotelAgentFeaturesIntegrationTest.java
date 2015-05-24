@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotEquals;
 import hotel.Hotel;
 import hotel.HotelService;
 import hotel.Room;
+import hotel.RoomDao;
+import hotel.RoomService;
 import hotel.RoomTimeSlot;
 import hotel.TimeSlot;
 import integration.Request;
@@ -24,10 +26,12 @@ import spark.Spark;
 
 public class HotelAgentFeaturesIntegrationTest {
     private static final String HOTEL_CODE = "1";
+    private static final String HOTEL_CODE_CREATE = "2";
     private static final String AGENT_CODE = "1";
     private static final String LOCATION_CODE = "1";
     private static final String INCLUDES_BREAKFAST = "true";
     private static final String ROOM_CODE = "1";
+    private static final String ROOM_CODE_CREATE = "2";
     private static final String ADULT_SPACE = "1";
     private static final String CHILDREN_SPACE = "0";
 
@@ -45,6 +49,10 @@ public class HotelAgentFeaturesIntegrationTest {
 
     @Before
     public void setUp() {
+        HotelService hotelService = new HotelService();
+        Hotel hotel = hotelService.saveNew(new Hotel(1, 1, 1, true));
+        RoomService roomService = new RoomService(new RoomDao());
+        roomService.saveNew(new Room(1, hotel, 1, 1));
     }
     
     @AfterClass
@@ -55,7 +63,7 @@ public class HotelAgentFeaturesIntegrationTest {
     @Test
     public void aNewHotelShouldBeCreated() {
         Map<String, String> postParameters = new HashMap<String, String>();
-        postParameters.put("code", HOTEL_CODE);
+        postParameters.put("code", HOTEL_CODE_CREATE);
         postParameters.put("agentCode", AGENT_CODE);
         postParameters.put("locationCode", LOCATION_CODE);
         postParameters.put("includesBreakfast", INCLUDES_BREAKFAST);
@@ -63,7 +71,7 @@ public class HotelAgentFeaturesIntegrationTest {
         assertEquals(200, res.status);
         Hotel hotel = Hotel.fromJsonString(res.body);
         assertEquals(Integer.parseInt(AGENT_CODE), hotel.getAgentCode());
-        assertEquals(Integer.parseInt(HOTEL_CODE), hotel.getCode());
+        assertEquals(Integer.parseInt(HOTEL_CODE_CREATE), hotel.getCode());
         assertEquals(Integer.parseInt(LOCATION_CODE), hotel.getLocationCode());
         assertEquals(Boolean.valueOf(INCLUDES_BREAKFAST).booleanValue(), hotel.includesBreakfast());
         assertNotEquals(0, hotel.getId());
@@ -71,17 +79,15 @@ public class HotelAgentFeaturesIntegrationTest {
 
     @Test
     public void aNewRoomShouldBeCreated() {
-        HotelService hotelService = new HotelService();
-        hotelService.saveNew(new Hotel(1, 1, 1, true));
         Map<String, String> postParameters = new HashMap<String, String>();
-        postParameters.put("code", ROOM_CODE);
+        postParameters.put("code", ROOM_CODE_CREATE);
         postParameters.put("hotelCode", HOTEL_CODE);
         postParameters.put("adultSpace", ADULT_SPACE);
         postParameters.put("childrenSpace", CHILDREN_SPACE);
         TestResponse res = Request.post("/hotel/room", postParameters);
         assertEquals(200, res.status);
         Room room = Room.fromJsonString(res.body);
-        assertEquals(Integer.parseInt(ROOM_CODE), room.getCode());
+        assertEquals(Integer.parseInt(ROOM_CODE_CREATE), room.getCode());
         assertEquals(Integer.parseInt(HOTEL_CODE), room.getHotel().getCode());
         assertEquals(Integer.parseInt(ADULT_SPACE), room.getAdultSpace());
         assertEquals(Integer.parseInt(CHILDREN_SPACE), room.getChildrenSpace());
@@ -90,7 +96,12 @@ public class HotelAgentFeaturesIntegrationTest {
     
         @Test
     public void aNewRoomTimeSlotShouldBeCreated() {
-        TestResponse res = Request.post("/room/timeslot?code=1&hotelCode=1&adultSpace=1&childrenSpace=1&availableFrom=2015-12-01&availableTo=2016-01-15&locationCode=1&includesBreakfast=true&agentCode=1");
+        Map<String, String> postParameters = new HashMap<String, String>();
+        postParameters.put("roomCode", ROOM_CODE);
+        postParameters.put("hotelCode", HOTEL_CODE);
+        postParameters.put("availableFrom", "2015-12-01");
+        postParameters.put("availableTo", "2016-01-15");
+        TestResponse res = Request.post("/hotel/room/timeslot", postParameters);
         RoomTimeSlot roomTimeSlot = RoomTimeSlot.fromJsonString(res.body);
         Room room = roomTimeSlot.getRoom();
         TimeSlot timeSlot = roomTimeSlot.getTimeSlot();
@@ -98,11 +109,11 @@ public class HotelAgentFeaturesIntegrationTest {
         assertEquals(1, room.getHotel().getAgentCode());
         assertEquals(1, room.getAdultSpace());
         assertEquals(1, room.getChildrenSpace());
-        assertEquals("2015-12-01", timeSlot.getFrom().toString());		
+        assertEquals("2015-12-01", timeSlot.getFrom().toString());
         assertEquals("2016-01-15", timeSlot.getTo().toString());
         // TODO: Failing test until database integration is implemented
-        assertNotEquals(0, timeSlot.getId());
-        assertEquals(1, room.getHotel().getLocationCode());	    		
+        assertNotEquals(0, roomTimeSlot.getId());
+        assertEquals(1, room.getHotel().getLocationCode());
         assertEquals(true, room.getHotel().includesBreakfast());
     }
 }

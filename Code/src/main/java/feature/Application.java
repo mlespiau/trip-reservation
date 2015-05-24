@@ -7,8 +7,6 @@ import hotel.HotelService;
 import hotel.Room;
 import hotel.RoomDao;
 import hotel.RoomService;
-import hotel.RoomTimeSlot;
-import hotel.RoomTimeSlotDao;
 import hotel.RoomTimeSlotService;
 import hotel.TimeSlot;
 
@@ -16,18 +14,11 @@ public class Application {
     // TODO: agentCode should be part of the authentication API and be accessible if the user is an hotel agent
     // TODO: same with customerCode and systemAdminCode
     public static void main(String[] args) {
-        RoomTimeSlotService roomTimeSlotService = new RoomTimeSlotService(
-            new RoomTimeSlotDao() {
-                @Override
-                public int save(RoomTimeSlot roomTimeSlot) {
-                    // TODO Auto-generated method stub
-                    return 0;
-                }
-            }
-        );
         HotelService hotelService = new HotelService();
         RoomService roomService = new RoomService(new RoomDao());
+        RoomTimeSlotService roomTimeSlotService = new RoomTimeSlotService();
         HotelRepository hotelRepository = new HotelRepository();
+        RoomRepository roomRepository = new RoomRepository();
         post("/hotel", (req, res) -> hotelService.saveNew(Hotel.fromQueryParams(req.queryMap())), json());
         // TODO: here we need some validations hotel should 
         // Hotel exist
@@ -38,8 +29,11 @@ public class Application {
                hotelRepository.findByCode(Integer.parseInt(req.queryParams("hotelCode")))
            )
         ), json());
-        post("/room/timeslot", (req, res) -> roomTimeSlotService.create(
-            Room.fromQueryParams(req.queryMap(), hotelRepository.findByCode(Integer.parseInt(req.queryParams("hotelCode")))),
+        post("/hotel/room/timeslot", (req, res) -> roomTimeSlotService.create(
+            roomRepository.findByCode(
+                Integer.parseInt(req.queryParams("hotelCode")),
+                Integer.parseInt(req.queryParams("roomCode"))
+            ),
             TimeSlot.fromQueryParams(req.queryMap())
         ), json());
         

@@ -1,1 +1,3 @@
 TRUNCATE TABLE hotel;
+TRUNCATE TABLE room;
+TRUNCATE TABLE roomTimeSlot;

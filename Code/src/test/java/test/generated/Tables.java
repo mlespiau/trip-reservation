@@ -8,6 +8,7 @@ import javax.annotation.Generated;
 
 import test.generated.tables.Hotel;
 import test.generated.tables.Room;
+import test.generated.tables.Roomtimeslot;
 
 
 /**
@@ -32,4 +33,9 @@ public class Tables {
 	 * The table tripreservation.room
 	 */
 	public static final Room ROOM = test.generated.tables.Room.ROOM;
+
+	/**
+	 * The table tripreservation.roomTimeSlot
+	 */
+	public static final Roomtimeslot ROOMTIMESLOT = test.generated.tables.Roomtimeslot.ROOMTIMESLOT;
 }

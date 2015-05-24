@@ -11,9 +11,7 @@ public class RoomTimeSlotServiceTest {
     public void testCreateSetsIdToTimeSlot() {
         RoomTimeSlotDao mockedRoomTimeSlotDao = mock(RoomTimeSlotDao.class);
         when(mockedRoomTimeSlotDao.save((RoomTimeSlot) any())).thenReturn(1);
-        RoomTimeSlotService roomTimeSlotService = new RoomTimeSlotService(
-            mockedRoomTimeSlotDao
-        );
+        RoomTimeSlotService roomTimeSlotService = new RoomTimeSlotService();
         RoomTimeSlot savedRoomTimeSlot = roomTimeSlotService.create(
             new Room(1, new Hotel(1, 1, 1, true), 1, 0),
             TimeSlot.create(LocalDate.now(), LocalDate.now())

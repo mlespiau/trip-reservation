@@ -24,3 +24,13 @@ CREATE TABLE room(
   PRIMARY KEY(id),
   UNIQUE KEY(code, hotelId)
 ) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS roomTimeSlot;
+CREATE TABLE roomTimeSlot(
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  roomId INT UNSIGNED NOT NULL,
+  fromDate date NOT NULL,
+  toDate date NOT NULL,
+  PRIMARY KEY(id),
+  UNIQUE KEY(id)
+) DEFAULT CHARSET=utf8;

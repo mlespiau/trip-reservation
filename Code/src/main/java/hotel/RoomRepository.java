@@ -7,6 +7,8 @@ import framework.Database;
 import org.jooq.Record;
 import org.jooq.types.UInteger;
 
+import test.generated.tables.pojos.HotelPojo;
+
 public class RoomRepository {
 
     public Room findByCode(int hotelId, int roomCode, int agentCode) {
@@ -16,11 +18,7 @@ public class RoomRepository {
             and(ROOM.CODE.equal(UInteger.valueOf(roomCode))).
             and(HOTEL.AGENTCODE.equal(UInteger.valueOf(agentCode))).
             fetchOne();
-        Hotel hotel = new Hotel(
-            record.getValue(HOTEL.CODE).intValue(),
-            record.getValue(HOTEL.AGENTCODE).intValue(),
-            record.getValue(HOTEL.LOCATIONCODE).intValue(),
-            Boolean.valueOf((record.getValue(HOTEL.INCLUDESBREAKFAST).intValue() == 1 ? "true" : "false")));
+        Hotel hotel = Hotel.fromPojo(record.into(HotelPojo.class));
         Room room = new Room(
             record.getValue(ROOM.CODE).intValue(),
             hotel,

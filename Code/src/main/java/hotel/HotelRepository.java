@@ -6,7 +6,7 @@ import org.jooq.types.UInteger;
 
 import test.generated.tables.daos.HotelDao;
 import test.generated.tables.pojos.HotelPojo;
-import feature.Database;
+import framework.Database;
 
 public class HotelRepository {
 

@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 
+import framework.Database;
+
 public class DbRebuilder {
     private static DbRebuilder instance = new DbRebuilder();
     private DbRebuilder() {

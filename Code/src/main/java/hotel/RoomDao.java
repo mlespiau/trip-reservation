@@ -5,7 +5,7 @@ import org.jooq.types.UInteger;
 
 import test.generated.Tables;
 import test.generated.tables.records.RoomRecord;
-import feature.Database;
+import framework.Database;
 
 public class RoomDao {
     public int save(Room room) {

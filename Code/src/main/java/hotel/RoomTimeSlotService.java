@@ -7,7 +7,7 @@ import org.jooq.types.UInteger;
 
 import test.generated.Tables;
 import test.generated.tables.records.RoomtimeslotRecord;
-import feature.Database;
+import framework.Database;
 
 
 public class RoomTimeSlotService {

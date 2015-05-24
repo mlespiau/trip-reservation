@@ -1,6 +1,6 @@
 package hotel;
 
-import feature.Database;
+import framework.Database;
 
 import org.jooq.exception.DataAccessException;
 import org.jooq.types.UInteger;

@@ -2,6 +2,7 @@ package feature;
 
 import static test.generated.tables.Hotel.HOTEL;
 import static test.generated.tables.Room.ROOM;
+import framework.Database;
 import hotel.Hotel;
 import hotel.Room;
 

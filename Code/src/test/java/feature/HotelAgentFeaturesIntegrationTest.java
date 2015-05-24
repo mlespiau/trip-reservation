@@ -33,6 +33,7 @@ public class HotelAgentFeaturesIntegrationTest {
     private static final String ROOM_CODE_CREATE = "2";
     private static final String ADULT_SPACE = "1";
     private static final String CHILDREN_SPACE = "0";
+    private static final String AGENT_TOKEN = "someSecurityToken";
 
     @BeforeClass
     public static void beforeClass() throws InterruptedException {
@@ -64,6 +65,7 @@ public class HotelAgentFeaturesIntegrationTest {
         Map<String, String> postParameters = new HashMap<String, String>();
         postParameters.put("code", HOTEL_CODE_CREATE);
         postParameters.put("agentCode", AGENT_CODE);
+        postParameters.put("agentToken", AGENT_TOKEN);
         postParameters.put("locationCode", LOCATION_CODE);
         postParameters.put("includesBreakfast", INCLUDES_BREAKFAST);
         TestResponse res = Request.post("/hotel", postParameters);
@@ -82,6 +84,8 @@ public class HotelAgentFeaturesIntegrationTest {
         postParameters.put("code", ROOM_CODE_CREATE);
         postParameters.put("hotelCode", HOTEL_CODE);
         postParameters.put("adultSpace", ADULT_SPACE);
+        postParameters.put("agentToken", AGENT_TOKEN);
+        postParameters.put("agentCode", AGENT_CODE);
         postParameters.put("childrenSpace", CHILDREN_SPACE);
         TestResponse res = Request.post("/hotel/room", postParameters);
         assertEquals(200, res.status);
@@ -93,11 +97,13 @@ public class HotelAgentFeaturesIntegrationTest {
         assertNotEquals(0, room.getId());
     }
     
-        @Test
+    @Test
     public void aNewRoomTimeSlotShouldBeCreated() {
         Map<String, String> postParameters = new HashMap<String, String>();
+        postParameters.put("agentToken", AGENT_TOKEN);
         postParameters.put("roomCode", ROOM_CODE);
         postParameters.put("hotelCode", HOTEL_CODE);
+        postParameters.put("agentCode", AGENT_CODE);
         postParameters.put("availableFrom", "2015-12-01");
         postParameters.put("availableTo", "2016-01-15");
         TestResponse res = Request.post("/hotel/room/timeslot", postParameters);
@@ -115,4 +121,5 @@ public class HotelAgentFeaturesIntegrationTest {
         assertEquals(1, room.getHotel().getLocationCode());
         assertEquals(true, room.getHotel().includesBreakfast());
     }
+    
 }

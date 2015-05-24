@@ -9,9 +9,6 @@ import framework.Database;
 
 public class HotelService {
     
-    public HotelService() { 
-    }
-    
     public Hotel saveNew(Hotel hotel) {
         int id = this.save(hotel);
         hotel.setId(id);

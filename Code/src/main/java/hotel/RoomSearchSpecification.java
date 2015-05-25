@@ -52,7 +52,8 @@ public class RoomSearchSpecification {
             where(ROOMTIMESLOT.FROMDATE.lessThan(Date.valueOf(this.getCheckIn()))).
             and(ROOMTIMESLOT.TODATE.greaterThan(Date.valueOf(this.getCheckOut()))).
             and(ROOM.ADULTSPACE.equal(UInteger.valueOf(this.getAdultSpace()))).
-            and(ROOM.CHILDRENSPACE.equal(UInteger.valueOf(this.getChildrenSpace())));
+            and(ROOM.CHILDRENSPACE.equal(UInteger.valueOf(this.getChildrenSpace()))).
+            and(ROOMTIMESLOT.BOOKINGID.isNull());
 		return query;
 	}
 }

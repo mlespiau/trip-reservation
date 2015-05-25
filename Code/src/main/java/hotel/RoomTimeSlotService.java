@@ -17,7 +17,7 @@ import framework.Database;
 public class RoomTimeSlotService {
     Logger logger = LoggerFactory.getLogger(getClass()); 
 
-    public RoomTimeSlot create(RoomTimeSlot roomTimeSlot) {
+    public RoomTimeSlot saveNew(RoomTimeSlot roomTimeSlot) {
         int id = this.save(roomTimeSlot);
         roomTimeSlot.getTimeSlot().setId(id);
         return roomTimeSlot;

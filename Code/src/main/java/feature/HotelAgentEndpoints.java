@@ -40,7 +40,7 @@ public class HotelAgentEndpoints {
                 Integer.parseInt(req.queryParams("roomCode")),
                 hotelAgent.getCode()
             ), TimeSlot.fromQueryParams(req.queryMap()));
-            return roomTimeSlotService.create(roomTimeSlot);
+            return roomTimeSlotService.saveNew(roomTimeSlot);
         }, json());
     }
 }

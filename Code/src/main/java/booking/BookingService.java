@@ -30,7 +30,7 @@ public class BookingService {
                 newRoomTimeSlot.setBooking(create);
                 bookedRoomTimeSlot = newRoomTimeSlot;
             }
-            this.roomTimeSlotService.create(newRoomTimeSlot);
+            this.roomTimeSlotService.saveNew(newRoomTimeSlot);
         }
         this.roomTimeSlotService.delete(roomTimeSlot);
         return bookedRoomTimeSlot;

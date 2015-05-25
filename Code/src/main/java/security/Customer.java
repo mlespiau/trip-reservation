@@ -18,6 +18,7 @@ public class Customer extends User {
     protected List<Permission> getAllowedActions() {
         List<Permission> allowedActions = new ArrayList<Permission>();
         allowedActions.add(Permission.CAN_SEARCH_ROOMS);
+        allowedActions.add(Permission.CAN_BOOK_ROOMS);
         return allowedActions;
     }
 }

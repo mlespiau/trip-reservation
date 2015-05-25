@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 
 import framework.ApiError;
 
+// TODO: rename to Authentication service
 public class AuthorizationService {
     public AuthorizationService() {
         exception(InvalidUserException.class, (e, request, response) -> {
@@ -24,6 +25,7 @@ public class AuthorizationService {
         }
     }
 
+    // TODO: rename and update comment
     private void assertAgentTokenIsValid() {
         // This is left blank here on purpose. 
         // This should authenticate against an authentication service 
@@ -34,6 +36,14 @@ public class AuthorizationService {
         if (req.queryParams("customerToken") != null) {
             assertAgentTokenIsValid();
             return new Customer(Integer.parseInt(req.queryParams("customerCode")));
+        } else {
+            throw new InvalidUserException();
+        }
+    }
+    public SystemAdmin createSystemAdminFromRequest(Request req) {
+        if (req.queryParams("systemAdminToken") != null) {
+            assertAgentTokenIsValid();
+            return new SystemAdmin();
         } else {
             throw new InvalidUserException();
         }

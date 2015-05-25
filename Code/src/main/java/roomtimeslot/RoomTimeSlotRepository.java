@@ -3,6 +3,8 @@ package roomtimeslot;
 import static generated.tables.Hotel.HOTEL;
 import static generated.tables.Room.ROOM;
 import static generated.tables.Roomtimeslot.ROOMTIMESLOT;
+import static generated.tables.Booking.BOOKING;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,20 @@ public class RoomTimeSlotRepository {
             where(ROOMTIMESLOT.ID.equal(UInteger.valueOf(id))).
             fetchOne();
         return RoomTimeSlot.fromRecord(record);
+    }
+
+    public List<RoomTimeSlot> findBookedByRoomId(int roomId) {
+        Result<Record> result = Database.getInstance().getDslContext().
+                select().from(ROOMTIMESLOT).
+                join(ROOM).on(ROOMTIMESLOT.ROOMID.equal(ROOM.ID)).
+                join(HOTEL).on(ROOM.HOTELID.equal(HOTEL.ID)).
+                join(BOOKING).on(ROOMTIMESLOT.BOOKINGID.equal(BOOKING.ID)).
+                where(ROOM.ID.equal(UInteger.valueOf(roomId))).fetch();
+        List<RoomTimeSlot> list = new ArrayList<RoomTimeSlot>();
+        for(Record record : result) {
+            list.add(RoomTimeSlot.fromRecord(record));
+        }
+        return list;
     }
 
 

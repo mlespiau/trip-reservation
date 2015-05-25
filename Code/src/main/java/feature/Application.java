@@ -19,6 +19,7 @@ public class Application {
         AuthorizationService authorizationService = new AuthorizationService();
         RequestParameters.registerExceptionHandler();
         RoomTimeSlotRepository roomTimeSlotRepository = new RoomTimeSlotRepository();
+        BookingService bookingService = new BookingService(new TimeSlotCutter(), new RoomTimeSlotService(), roomTimeSlotRepository);
         new HotelAgentEndpoints(authorizationService,
             new HotelService(),
             new RoomService(),
@@ -28,7 +29,8 @@ public class Application {
             authorizationService,
             roomTimeSlotRepository,
             new RoomSearchSpecificationBuilder(),
-            new BookingService(new TimeSlotCutter(), new RoomTimeSlotService(), roomTimeSlotRepository),
+            bookingService,
             new RoomSearchService(roomTimeSlotRepository));
+        new SystemAdminEndpoints(authorizationService, bookingService);
     }
 }

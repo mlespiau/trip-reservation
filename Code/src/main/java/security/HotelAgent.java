@@ -17,7 +17,9 @@ public class HotelAgent extends User {
     @Override
     protected List<Permission> getAllowedActions() {
         List<Permission> allowedActions = new ArrayList<Permission>();
-//        allowedActions.add(Permission.CAN_SEARCH_ROOMS);
+        allowedActions.add(Permission.CAN_CREATE_HOTEL);
+        allowedActions.add(Permission.CAN_CREATE_ROOM);
+        allowedActions.add(Permission.CAN_ADD_TIMESLOT);
         return allowedActions;
     }
 }

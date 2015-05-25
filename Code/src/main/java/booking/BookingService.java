@@ -78,4 +78,8 @@ public class BookingService {
         return timeSlot.getFrom().isEqual(checkIn) && timeSlot.getTo().isEqual(checkOut);
     }
 
+    public List<RoomTimeSlot> findByRoomId(int roomId) {
+        return this.roomTimeSlotRepository.findBookedByRoomId(roomId);
+    }
+
 }

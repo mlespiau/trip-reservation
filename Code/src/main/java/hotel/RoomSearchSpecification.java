@@ -42,6 +42,8 @@ public class RoomSearchSpecification {
 		return childrenSpace;
 	}
 
+	// TODO: filter by includesBreakfast
+	// TODO: filter by location
 	public SelectConditionStep<Record> toQuery() {
 		SelectConditionStep<Record> query = Database.getInstance().getDslContext().
             select().from(ROOMTIMESLOT).

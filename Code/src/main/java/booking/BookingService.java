@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import roomtimeslot.RoomTimeSlot;
+import roomtimeslot.RoomTimeSlotRepository;
 import roomtimeslot.RoomTimeSlotService;
 import roomtimeslot.TimeSlot;
 import roomtimeslot.TimeSlotCutter;
@@ -25,13 +26,19 @@ public class BookingService {
     Logger logger = LoggerFactory.getLogger(getClass()); 
     private TimeSlotCutter timeSlotCutter;
     private RoomTimeSlotService roomTimeSlotService;
+    private RoomTimeSlotRepository roomTimeSlotRepository;
     
-    public BookingService(TimeSlotCutter timeSlotCutter, RoomTimeSlotService roomTimeSlotService) {
+    public BookingService(TimeSlotCutter timeSlotCutter, RoomTimeSlotService roomTimeSlotService, RoomTimeSlotRepository roomTimeSlotRepository) {
         this.timeSlotCutter = timeSlotCutter;
         this.roomTimeSlotService = roomTimeSlotService;
+        this.roomTimeSlotRepository = roomTimeSlotRepository;
     }
 
-    public RoomTimeSlot book(Customer customer, RoomTimeSlot roomTimeSlot, RequestParameters requestParameters) {
+    public RoomTimeSlot book(Customer customer, RequestParameters requestParameters) {
+        requestParameters.assertHasValue("roomTimeSlotId");
+        requestParameters.assertHasValue("checkIn");
+        requestParameters.assertHasValue("checkOut");
+        RoomTimeSlot roomTimeSlot = this.roomTimeSlotRepository.findById(requestParameters.getAsInteger("roomTimeSlotId"));
         LocalDate checkIn = requestParameters.getAsLocalDate("checkIn");
         LocalDate checkOut = requestParameters.getAsLocalDate("checkOut");
         List<TimeSlot> timeSlotPieces = this.timeSlotCutter.cutByDates(roomTimeSlot.getTimeSlot(), checkIn, checkOut);

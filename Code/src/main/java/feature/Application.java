@@ -28,7 +28,7 @@ public class Application {
             authorizationService,
             roomTimeSlotRepository,
             new RoomSearchSpecificationBuilder(),
-            new BookingService(new TimeSlotCutter(), new RoomTimeSlotService()),
+            new BookingService(new TimeSlotCutter(), new RoomTimeSlotService(), roomTimeSlotRepository),
             new RoomSearchService(roomTimeSlotRepository));
     }
 }

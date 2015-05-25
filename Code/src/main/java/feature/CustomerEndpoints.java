@@ -6,7 +6,6 @@ import static spark.Spark.post;
 import roomsearch.RoomSearchService;
 import roomsearch.RoomSearchSpecification;
 import roomsearch.RoomSearchSpecificationBuilder;
-import roomtimeslot.RoomTimeSlot;
 import roomtimeslot.RoomTimeSlotRepository;
 import security.AuthorizationService;
 import security.Customer;
@@ -33,11 +32,7 @@ public class CustomerEndpoints {
             Customer customer = authorizationService.createCustomerFromRequest(req);
             customer.assertCan(Permission.CAN_BOOK_ROOMS);
             RequestParameters requestParameters = new RequestParameters(req.queryMap());
-            requestParameters.assertHasValue("roomTimeSlotId");
-            requestParameters.assertHasValue("checkIn");
-            requestParameters.assertHasValue("checkOut");
-            RoomTimeSlot roomTimeSlot = roomTimeSlotRepository.findById(requestParameters.getAsInteger("roomTimeSlotId"));
-            return bookingService.book(customer, roomTimeSlot, requestParameters);
+            return bookingService.book(customer, requestParameters);
         }, json());
     }
 }

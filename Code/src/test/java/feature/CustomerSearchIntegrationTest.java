@@ -27,8 +27,8 @@ public class CustomerSearchIntegrationTest extends ApiIntegrationTest {
     
     @Test
     public void searchCheckInParameterIsRequired() {
-    	SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
-    	parameters.removeCheckIn();
+        SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
+        parameters.removeCheckIn();
         TestResponse res = this.search(parameters.get());
         assertNotEquals(200, res.status);
         assertTrue(res.body.contains("checkIn"));
@@ -36,8 +36,8 @@ public class CustomerSearchIntegrationTest extends ApiIntegrationTest {
     
     @Test
     public void searchCheckOutParameterIsRequired() {
-    	SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
-    	parameters.removeCheckOut();
+        SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
+        parameters.removeCheckOut();
         TestResponse res = this.search(parameters.get());
         assertNotEquals(200, res.status);
         assertTrue(res.body.contains("checkOut"));
@@ -45,8 +45,8 @@ public class CustomerSearchIntegrationTest extends ApiIntegrationTest {
     
     @Test
     public void searchAdultSpaceParameterIsRequired() {
-    	SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
-    	parameters.removeAdultSpace();
+        SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
+        parameters.removeAdultSpace();
         TestResponse res = this.search(parameters.get());
         assertNotEquals(200, res.status);
         assertTrue(res.body.contains("adultSpace"));
@@ -54,8 +54,8 @@ public class CustomerSearchIntegrationTest extends ApiIntegrationTest {
     
     @Test
     public void searchChildrenSpaceParameterIsRequired() {
-    	SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
-    	parameters.removeChildrenSpace();
+        SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
+        parameters.removeChildrenSpace();
         TestResponse res = this.search(parameters.get());
         assertNotEquals(200, res.status);
         assertTrue(res.body.contains("childrenSpace"));
@@ -63,7 +63,7 @@ public class CustomerSearchIntegrationTest extends ApiIntegrationTest {
 
     @Test
     public void searchBetweenDatesAndRoomSizeReturnsTwoTimeSlot() {
-    	SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
+        SearchParameterBuilder parameters = SearchParameterBuilder.createDefault();
         TestResponse res = this.search(parameters.get());
         assertEquals(200, res.status);
         Type listType = new TypeToken<ArrayList<RoomTimeSlot>>() {}.getType();
@@ -77,52 +77,58 @@ public class CustomerSearchIntegrationTest extends ApiIntegrationTest {
     }
     
     private static class SearchParameterBuilder {
-    	private Map<String, String> parameters = new HashMap<String, String>();
+        private Map<String, String> parameters = new HashMap<String, String>();
 
-    	public void addCheckIn() {
-    		parameters.put("checkIn", "2014-05-28");
-    	}
-    	
-		public void removeCheckIn() {
-			parameters.remove("checkIn");
-		}
+        public void addCheckIn() {
+            parameters.put("checkIn", "2014-05-28");
+        }
 
-		public void addCheckOut() {
-    		parameters.put("checkOut", "2014-06-10");
-    	}
+        public void removeCheckIn() {
+            parameters.remove("checkIn");
+        }
 
-    	public void removeCheckOut() {
-			parameters.remove("checkOut");
-		}
+        public void addCheckOut() {
+            parameters.put("checkOut", "2014-06-10");
+        }
 
-    	public void addAdultSpace() {
+        public void removeCheckOut() {
+            parameters.remove("checkOut");
+        }
+
+        public void addAdultSpace() {
             parameters.put("adultSpace", "2");
-    	}
-    	
-		public void removeAdultSpace() {
-			parameters.remove("adultSpace");
-		}
+        }
 
-    	public void addChildrenSpace() {
-    		parameters.put("childrenSpace", "0");
-    	}
-    	
-    	public void removeChildrenSpace() {
-    		parameters.remove("childrenSpace");
-    	}
-    	
-    	public Map<String, String> get() {
-    		return parameters;
-    	}
-    	
-    	public static SearchParameterBuilder createDefault() {
-    		SearchParameterBuilder instance = new SearchParameterBuilder();
-    		instance.addCheckIn();
-    		instance.addCheckOut();
-    		instance.addAdultSpace();
-    		instance.addChildrenSpace();
-    		return instance;
-    	}
+        public void removeAdultSpace() {
+            parameters.remove("adultSpace");
+        }
+
+        public void addChildrenSpace() {
+            parameters.put("childrenSpace", "0");
+        }
+
+        public void removeChildrenSpace() {
+            parameters.remove("childrenSpace");
+        }
+        
+        public void addAuthentication() {
+            parameters.put("customerToken", "someToken");
+            parameters.put("customerCode", "1");
+        }
+
+        public Map<String, String> get() {
+            return parameters;
+        }
+
+        public static SearchParameterBuilder createDefault() {
+            SearchParameterBuilder instance = new SearchParameterBuilder();
+            instance.addCheckIn();
+            instance.addCheckOut();
+            instance.addAdultSpace();
+            instance.addChildrenSpace();
+            instance.addAuthentication();
+            return instance;
+        }
     }
 }
 

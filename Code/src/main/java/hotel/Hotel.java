@@ -1,12 +1,13 @@
 package hotel;
 
+import generated.tables.pojos.HotelPojo;
+
 import org.jooq.Record;
 
 import com.google.gson.Gson;
 
 import security.HotelAgent;
 import spark.QueryParamsMap;
-import test.generated.tables.pojos.HotelPojo;
 
 public class Hotel {
     private int id;

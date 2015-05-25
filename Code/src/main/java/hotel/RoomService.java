@@ -5,10 +5,10 @@ import org.jooq.types.UInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import test.generated.Tables;
-import test.generated.tables.records.RoomRecord;
 import framework.DaoException;
 import framework.Database;
+import generated.Tables;
+import generated.tables.records.RoomRecord;
 
 public class RoomService {
     Logger logger = LoggerFactory.getLogger(getClass()); 

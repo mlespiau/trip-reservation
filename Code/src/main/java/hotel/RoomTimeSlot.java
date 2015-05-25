@@ -1,8 +1,9 @@
 package hotel;
 
+import generated.tables.pojos.RoomtimeslotPojo;
+
 import org.jooq.Record;
 
-import test.generated.tables.pojos.RoomtimeslotPojo;
 import booking.Booking;
 
 import com.google.gson.Gson;

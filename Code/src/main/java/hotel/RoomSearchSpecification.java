@@ -1,8 +1,8 @@
 package hotel;
 
-import static test.generated.tables.Hotel.HOTEL;
-import static test.generated.tables.Room.ROOM;
-import static test.generated.tables.Roomtimeslot.ROOMTIMESLOT;
+import static generated.tables.Hotel.HOTEL;
+import static generated.tables.Room.ROOM;
+import static generated.tables.Roomtimeslot.ROOMTIMESLOT;
 
 import java.sql.Date;
 import java.time.LocalDate;

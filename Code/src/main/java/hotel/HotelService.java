@@ -5,10 +5,10 @@ import org.jooq.types.UInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import test.generated.Tables;
-import test.generated.tables.records.HotelRecord;
 import framework.DaoException;
 import framework.Database;
+import generated.Tables;
+import generated.tables.records.HotelRecord;
 
 public class HotelService {
     Logger logger = LoggerFactory.getLogger(getClass()); 

@@ -1,14 +1,13 @@
 package hotel;
 
-import static test.generated.tables.Hotel.HOTEL;
-import static test.generated.tables.Room.ROOM;
+import static generated.tables.Hotel.HOTEL;
+import static generated.tables.Room.ROOM;
 import framework.DaoException;
 import framework.Database;
+import generated.tables.pojos.HotelPojo;
 
 import org.jooq.Record;
 import org.jooq.types.UInteger;
-
-import test.generated.tables.pojos.HotelPojo;
 
 public class RoomRepository {
 

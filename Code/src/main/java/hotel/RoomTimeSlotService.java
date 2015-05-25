@@ -7,13 +7,13 @@ import org.jooq.types.UInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import test.generated.Tables;
-import test.generated.tables.daos.RoomtimeslotDao;
-import test.generated.tables.records.RoomtimeslotRecord;
 import framework.DaoException;
 import framework.Database;
+import generated.Tables;
+import generated.tables.daos.RoomtimeslotDao;
+import generated.tables.records.RoomtimeslotRecord;
 
-// TODO: Move generated classes to generated package instead of test.generated
+// TODO: Move generated classes to generated package instead of generated
 public class RoomTimeSlotService {
     Logger logger = LoggerFactory.getLogger(getClass()); 
 

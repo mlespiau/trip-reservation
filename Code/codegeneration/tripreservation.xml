@@ -35,7 +35,7 @@
     </generate>
     <target>
       <!-- The destination package of your generated classes (within the destination directory) -->
-      <packageName>test.generated</packageName>
+      <packageName>generated</packageName>
       <!-- The destination directory of your generated classes -->
       <directory>/home/fallenjehova/www/dev/projects/trip-reservation/Code/src/main/java/</directory>
     </target>

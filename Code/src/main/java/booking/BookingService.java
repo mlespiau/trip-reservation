@@ -2,6 +2,8 @@ package booking;
 
 import framework.DaoException;
 import framework.Database;
+import generated.Tables;
+import generated.tables.records.BookingRecord;
 import hotel.RoomTimeSlot;
 import hotel.RoomTimeSlotService;
 import hotel.TimeSlot;
@@ -17,8 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import security.Customer;
-import test.generated.Tables;
-import test.generated.tables.records.BookingRecord;
 
 public class BookingService {
     Logger logger = LoggerFactory.getLogger(getClass()); 

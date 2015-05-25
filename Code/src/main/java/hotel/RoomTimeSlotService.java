@@ -13,7 +13,6 @@ import generated.Tables;
 import generated.tables.daos.RoomtimeslotDao;
 import generated.tables.records.RoomtimeslotRecord;
 
-// TODO: Move generated classes to generated package instead of generated
 public class RoomTimeSlotService {
     Logger logger = LoggerFactory.getLogger(getClass()); 
 

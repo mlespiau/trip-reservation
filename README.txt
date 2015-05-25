@@ -40,4 +40,8 @@ I started writing hand-sql but switched to jooq because I was running out of tim
 * Add a transaction for the booking service
 * More unit and integration tests
 * System admin search
+* Bug fix some small bugs
+
+I've commited everything in a private repository in my github account. I can invite you as a collaborator if you are interested. Here are my stats:
+99 commits / 13,952 ++ / 6,265 --
 

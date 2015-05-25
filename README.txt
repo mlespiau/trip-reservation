@@ -39,3 +39,5 @@ I started writing hand-sql but switched to jooq because I was running out of tim
 * Add foreign keys to mysql tables
 * Add a transaction for the booking service
 * More unit and integration tests
+* System admin search
+

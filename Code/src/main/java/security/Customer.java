@@ -1,5 +1,8 @@
 package security;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Customer extends User {
     private int code;
     
@@ -9,5 +12,12 @@ public class Customer extends User {
     
     public int getCode() {
         return code;
+    }
+
+    @Override
+    protected List<Permission> getAllowedActions() {
+        List<Permission> allowedActions = new ArrayList<Permission>();
+        allowedActions.add(Permission.CAN_SEARCH_ROOMS);
+        return allowedActions;
     }
 }

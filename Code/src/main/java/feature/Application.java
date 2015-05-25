@@ -1,23 +1,24 @@
 package feature;
 
-import booking.BookingService;
 import hotel.HotelRepository;
 import hotel.HotelService;
 import room.RoomRepository;
 import room.RoomService;
+import roomsearch.RoomSearchService;
 import roomsearch.RoomSearchSpecificationBuilder;
 import roomtimeslot.RoomTimeSlotRepository;
 import roomtimeslot.RoomTimeSlotService;
 import roomtimeslot.TimeSlotCutter;
 import security.AuthorizationService;
+import booking.BookingService;
 import framework.RequestParameters;
 
 public class Application {
-    // TODO: agentCode, customerCode and systemAdminCode should be part of the authentication API and be accessible from the user object
     // TODO: hide some values/ids from json serialization
     public static void main(String[] args) {
         AuthorizationService authorizationService = new AuthorizationService();
         RequestParameters.registerExceptionHandler();
+        RoomTimeSlotRepository roomTimeSlotRepository = new RoomTimeSlotRepository();
         new HotelAgentEndpoints(authorizationService,
             new HotelService(),
             new RoomService(),
@@ -25,8 +26,9 @@ public class Application {
             new RoomRepository());
         new CustomerEndpoints(
             authorizationService,
-            new RoomTimeSlotRepository(),
+            roomTimeSlotRepository,
             new RoomSearchSpecificationBuilder(),
-            new BookingService(new TimeSlotCutter(), new RoomTimeSlotService()));
+            new BookingService(new TimeSlotCutter(), new RoomTimeSlotService()),
+            new RoomSearchService(roomTimeSlotRepository));
     }
 }

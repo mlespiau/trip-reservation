@@ -72,9 +72,7 @@ public class CustomerSearchIntegrationTest extends ApiIntegrationTest {
     }
 
     // TODO: Add input validation (checkIn < checkOut)
-    
     private TestResponse search(Map<String, String> postParameters) {
-        // TODO: Add authentication
         return Request.get("/hotel/room/timeslot/search", postParameters);
     }
     

@@ -15,10 +15,10 @@ import security.Customer;
 public class CustomerEndpoints {
 
     public CustomerEndpoints(
-    		AuthorizationService authorizationService,
-			RoomTimeSlotRepository roomTimeSlotRepository,
-			RoomSearchSpecificationBuilder roomSearchSpecificationBuilder,
-			BookingService bookingService) {
+            AuthorizationService authorizationService,
+            RoomTimeSlotRepository roomTimeSlotRepository,
+            RoomSearchSpecificationBuilder roomSearchSpecificationBuilder,
+            BookingService bookingService) {
         get("/hotel/room/timeslot/search", (req, res) -> {
         	// TODO: Authorize 
         	// TODO: Maybe users should be gathered before and the user API ask for different "permissions"

@@ -27,7 +27,6 @@ public class RoomTimeSlotRepository {
         return  list;
     }
 
-    // TODO: domain "leaks" as RoomTimeSlot as they know about other tables? document that would like to make it agnostic
     public RoomTimeSlot findById(int id) {
         Record record = Database.getInstance().getDslContext().
             select().from(ROOMTIMESLOT).

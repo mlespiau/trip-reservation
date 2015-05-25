@@ -35,9 +35,7 @@ public class BookingService {
     }
 
     public RoomTimeSlot book(Customer customer, RequestParameters requestParameters) {
-        requestParameters.assertHasValue("roomTimeSlotId");
-        requestParameters.assertHasValue("checkIn");
-        requestParameters.assertHasValue("checkOut");
+        this.assertHasRequiredParameters(requestParameters);
         RoomTimeSlot roomTimeSlot = this.roomTimeSlotRepository.findById(requestParameters.getAsInteger("roomTimeSlotId"));
         LocalDate checkIn = requestParameters.getAsLocalDate("checkIn");
         LocalDate checkOut = requestParameters.getAsLocalDate("checkOut");
@@ -54,6 +52,12 @@ public class BookingService {
         }
         this.roomTimeSlotService.delete(roomTimeSlot);
         return bookedRoomTimeSlot;
+    }
+    
+    private void assertHasRequiredParameters(RequestParameters requestParameters) {
+        requestParameters.assertHasValue("roomTimeSlotId");
+        requestParameters.assertHasValue("checkIn");
+        requestParameters.assertHasValue("checkOut");
     }
     
     private Booking saveNew(Booking booking) {

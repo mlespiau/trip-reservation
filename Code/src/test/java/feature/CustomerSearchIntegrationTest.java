@@ -18,7 +18,7 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class CustomerFeaturesIntegrationTest extends ApiIntegrationTest {
+public class CustomerSearchIntegrationTest extends ApiIntegrationTest {
     @Before
     public void setUp() {
         DbRebuilder.getInstance().createFakeDataForTests();

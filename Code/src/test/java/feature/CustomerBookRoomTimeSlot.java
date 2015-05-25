@@ -1,6 +1,8 @@
 package feature;
 
 import static org.junit.Assert.*;
+import hotel.Hotel;
+import hotel.RoomTimeSlot;
 import integration.ApiIntegrationTest;
 import integration.Request;
 import integration.TestResponse;
@@ -65,7 +67,10 @@ public class CustomerBookRoomTimeSlot extends ApiIntegrationTest {
         parameters.put("customerToken", "someToken");
         TestResponse res = this.bookRoomTimeSlot(parameters);
         assertEquals(200, res.status);
-        assertTrue(res.body.contains("customerCode"));
+        RoomTimeSlot roomTimeSlot = RoomTimeSlot.fromJsonString(res.body);
+        assertNotEquals(0, roomTimeSlot.getBooking().getId());
+        assertEquals(1, roomTimeSlot.getBooking().getCustomerCode());
+        assertNotNull(roomTimeSlot.getBooking().getDate());
     }
     
     private TestResponse bookRoomTimeSlot(Map<String, String> postParameters) {

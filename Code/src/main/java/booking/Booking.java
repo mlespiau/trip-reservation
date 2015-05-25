@@ -27,4 +27,8 @@ public class Booking {
     public static Booking create(int customerCode) {
         return new Booking(customerCode, LocalDate.now());
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

@@ -23,7 +23,7 @@ public class CustomerEndpoints {
             BookingService bookingService,
             RoomSearchService roomSearchService) {
         get("/hotel/room/timeslot/search", (req, res) -> {
-        	// TODO: Add pagination
+            // TODO: Add pagination
             Customer customer = authorizationService.createCustomerFromRequest(req);
             customer.assertCan(Permission.CAN_SEARCH_ROOMS);
             RoomSearchSpecification roomSearchSpecification = roomSearchSpecificationBuilder.fromQueryParams(new RequestParameters(req.queryMap()));
@@ -37,8 +37,7 @@ public class CustomerEndpoints {
             requestParameters.assertHasValue("checkIn");
             requestParameters.assertHasValue("checkOut");
             RoomTimeSlot roomTimeSlot = roomTimeSlotRepository.findById(requestParameters.getAsInteger("roomTimeSlotId"));
-        	return bookingService.book(customer, roomTimeSlot, requestParameters.getAsLocalDate("checkIn"), requestParameters.getAsLocalDate("checkOut"));
+            return bookingService.book(customer, roomTimeSlot, requestParameters);
         }, json());
     }
-
 }

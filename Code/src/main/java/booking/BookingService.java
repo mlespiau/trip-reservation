@@ -2,6 +2,7 @@ package booking;
 
 import framework.DaoException;
 import framework.Database;
+import framework.RequestParameters;
 import generated.Tables;
 import generated.tables.records.BookingRecord;
 
@@ -30,8 +31,9 @@ public class BookingService {
         this.roomTimeSlotService = roomTimeSlotService;
     }
 
-    public RoomTimeSlot book(Customer customer, RoomTimeSlot roomTimeSlot,
-            LocalDate checkIn, LocalDate checkOut) {
+    public RoomTimeSlot book(Customer customer, RoomTimeSlot roomTimeSlot, RequestParameters requestParameters) {
+        LocalDate checkIn = requestParameters.getAsLocalDate("checkIn");
+        LocalDate checkOut = requestParameters.getAsLocalDate("checkOut");
         List<TimeSlot> timeSlotPieces = this.timeSlotCutter.cutByDates(roomTimeSlot.getTimeSlot(), checkIn, checkOut);
         RoomTimeSlot bookedRoomTimeSlot = null;
         for (TimeSlot timeSlot : timeSlotPieces) {

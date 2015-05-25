@@ -30,4 +30,12 @@ I chose mysql for database access. I love mysql because it let's you start simpl
 
 I started writing hand-sql but switched to jooq because I was running out of time and now I love it.
 
-
+## Things that I wanted to implement but ran out of time:
+* Hotel room search
+    * Pagination
+    * Location and includesBreakfast filters
+* Input validation such as types (integer, dates) and business rules (checkIn < checkOut).
+* Hide some values from json serialization (such as our internal ids or data that is not need in some operations)
+* Add foreign keys to mysql tables
+* Add a transaction for the booking service
+* More unit and integration tests

@@ -27,7 +27,7 @@ public class HotelAgentEndpoints {
         }, json());
         post("/hotel/room", (req, res) -> {
             HotelAgent hotelAgent = authorizationService.createHotelAgentFromRequest(req);
-            return roomService .saveNew(Room.fromQueryParams(
+            return roomService.saveNew(Room.fromQueryParams(
                     req.queryMap(),
                     hotelRepository.findByCode(Integer.parseInt(req.queryParams("hotelCode")), hotelAgent.getCode())
                 )

@@ -9,16 +9,14 @@ public class TimeSlot {
     private int id;
     private LocalDate from;
     private LocalDate to;
-    private boolean isBooked;
     
-    public TimeSlot(LocalDate from, LocalDate to, boolean isBooked) {
+    public TimeSlot(LocalDate from, LocalDate to) {
         this.from = from;
         this.to = to;
-        this.isBooked = isBooked;
     }
     
     public static TimeSlot create(LocalDate from, LocalDate to) {
-        return new TimeSlot(from, to, false);
+        return new TimeSlot(from, to);
     }
 
     public int getId() {
@@ -33,14 +31,14 @@ public class TimeSlot {
         return to;
     }
 
-    public boolean isBooked() {
-        return isBooked;
-    }
-
     public static TimeSlot fromQueryParams(QueryParamsMap queryMap) {
         return TimeSlot.create(
             LocalDate.parse(queryMap.get("availableFrom").value(), DateTimeFormatter.ISO_LOCAL_DATE),
             LocalDate.parse(queryMap.get("availableTo").value(), DateTimeFormatter.ISO_LOCAL_DATE)
         );
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

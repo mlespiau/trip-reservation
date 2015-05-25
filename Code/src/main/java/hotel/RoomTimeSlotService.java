@@ -19,7 +19,7 @@ public class RoomTimeSlotService {
     public RoomTimeSlot create(Room room, TimeSlot timeSlot) {
         RoomTimeSlot roomTimeSlot = new RoomTimeSlot(room, timeSlot);
         int id = this.save(roomTimeSlot);
-        roomTimeSlot.setId(id);
+        roomTimeSlot.getTimeSlot().setId(id);
         return roomTimeSlot;
     }
     

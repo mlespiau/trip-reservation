@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 public class RoomTimeSlot {
     private TimeSlot timeSlot;
     private Room room;
-    private int id;
 
     public RoomTimeSlot(Room room, TimeSlot timeSlot) {
         this.timeSlot = timeSlot;
@@ -23,14 +22,6 @@ public class RoomTimeSlot {
     public Room getRoom() {
         return room;
     }
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public static RoomTimeSlot fromJsonString(String json) {
         return new Gson().fromJson(json, RoomTimeSlot.class);
@@ -40,6 +31,7 @@ public class RoomTimeSlot {
         Room room = Room.fromRecord(record);
         RoomtimeslotPojo pojo = record.into(RoomtimeslotPojo.class);
         TimeSlot timeSlot = TimeSlot.create(pojo.getFromdate().toLocalDate(), pojo.getTodate().toLocalDate());
+        timeSlot.setId(pojo.getId().intValue());
         return new RoomTimeSlot(room, timeSlot);
     }
 }

@@ -1,7 +1,7 @@
 # Trip-reservation report
 # Matias Lespiau
 
-This document is part of Croosover tech trial assignment for Software engineering  manager – Java position. Given the time constrainst of three days I reaccomodated the scope of the project as I advanced on the domain modelling and technical discovery.
+This document is part of Crossover tech trial assignment for Software engineering  manager – Java position. Given the time constraints of three days I accommodated the scope of the project as I advanced on the domain modeling and technical discovery.
 
 ## Scope
 From the original requirements, I left aside:
@@ -15,5 +15,19 @@ What is covered:
 * customer can reserve an available room
 * system admin can view the reservations history for a given room
 
-The hotel room functionaliy was implementing having all the requirements in mind and I provide a description on how that functionality could have been implemented and which changes in the design should be done to support it.
+The hotel room functionality was implementing having all the requirements in mind and I provide a description on how that functionality could have been implemented and which changes in the design should be done to support it.
+
+## Used technologies
+For this assignment I tried to use as little libraries as possible while at the same time reflect a real scenario.
+I also wanted to discover and experiment modern Java tools. I did not have experience in most of the third libraries used.
+
+For the framework I used the Java spark microframework (http://sparkjava.com/). I've chosen it because it has a nice documentation,
+has no configuration boilerplate and it had almost everything that was needed.
+
+I included junit for doing some unit tests. They really helped me out during development but I was not able to do more due to time constrains. I should note that I love unit testing and where I work I coach a 4 hour workshop on unit testing and design every week :).
+
+I chose mysql for database access. I love mysql because it let's you start simple and can be tweaked to support a high amount of queries and transactions.
+
+I started writing hand-sql but switched to jooq because I was running out of time and now I love it.
+
 

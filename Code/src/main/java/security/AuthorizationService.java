@@ -18,23 +18,22 @@ public class AuthorizationService {
     }
     public HotelAgent createHotelAgentFromRequest(Request req) {
         if (req.queryParams("agentToken") != null) {
-            assertAgentTokenIsValid();
+            assertUserTokenIsValid();
             return new HotelAgent(Integer.parseInt(req.queryParams("agentCode")));
         } else {
             throw new InvalidUserException();
         }
     }
 
-    // TODO: rename and update comment
-    private void assertAgentTokenIsValid() {
+    private void assertUserTokenIsValid() {
         // This is left blank here on purpose. 
         // This should authenticate against an authentication service 
-        // the hotel agent code should be valid and that the session is active
+        // the user should be valid and the session should be active
     }
     
     public Customer createCustomerFromRequest(Request req) {
         if (req.queryParams("customerToken") != null) {
-            assertAgentTokenIsValid();
+            assertUserTokenIsValid();
             return new Customer(Integer.parseInt(req.queryParams("customerCode")));
         } else {
             throw new InvalidUserException();
@@ -42,7 +41,7 @@ public class AuthorizationService {
     }
     public SystemAdmin createSystemAdminFromRequest(Request req) {
         if (req.queryParams("systemAdminToken") != null) {
-            assertAgentTokenIsValid();
+            assertUserTokenIsValid();
             return new SystemAdmin();
         } else {
             throw new InvalidUserException();

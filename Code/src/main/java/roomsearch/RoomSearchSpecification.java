@@ -1,4 +1,4 @@
-package hotel;
+package roomsearch;
 
 import static generated.tables.Hotel.HOTEL;
 import static generated.tables.Room.ROOM;

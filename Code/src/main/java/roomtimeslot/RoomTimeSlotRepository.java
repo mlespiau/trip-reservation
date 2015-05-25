@@ -3,7 +3,6 @@ package roomtimeslot;
 import static generated.tables.Hotel.HOTEL;
 import static generated.tables.Room.ROOM;
 import static generated.tables.Roomtimeslot.ROOMTIMESLOT;
-import hotel.RoomSearchSpecification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,7 @@ import org.jooq.Record;
 import org.jooq.Result;
 import org.jooq.types.UInteger;
 
+import roomsearch.RoomSearchSpecification;
 import framework.Database;
 
 public class RoomTimeSlotRepository {

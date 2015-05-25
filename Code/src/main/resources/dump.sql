@@ -31,6 +31,15 @@ CREATE TABLE roomTimeSlot(
   roomId INT UNSIGNED NOT NULL,
   fromDate date NOT NULL,
   toDate date NOT NULL,
-  PRIMARY KEY(id),
-  UNIQUE KEY(id)
+  bookingId INT UNSIGNED NULL,
+  PRIMARY KEY(id)
 ) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS booking;
+CREATE TABLE booking(
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  customerCode INT UNSIGNED NOT NULL,
+  date date NOT NULL,
+  PRIMARY KEY(id)
+) DEFAULT CHARSET=utf8;
+

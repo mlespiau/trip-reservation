@@ -3,12 +3,14 @@ package hotel;
 import org.jooq.Record;
 
 import test.generated.tables.pojos.RoomtimeslotPojo;
+import booking.Booking;
 
 import com.google.gson.Gson;
 
 public class RoomTimeSlot {
     private TimeSlot timeSlot;
     private Room room;
+    private Booking booking;
 
     public RoomTimeSlot(Room room, TimeSlot timeSlot) {
         this.timeSlot = timeSlot;
@@ -22,6 +24,10 @@ public class RoomTimeSlot {
     public Room getRoom() {
         return room;
     }
+    
+    public Booking getBooking() {
+        return booking;
+    }
 
     public static RoomTimeSlot fromJsonString(String json) {
         return new Gson().fromJson(json, RoomTimeSlot.class);
@@ -33,5 +39,9 @@ public class RoomTimeSlot {
         TimeSlot timeSlot = TimeSlot.create(pojo.getFromdate().toLocalDate(), pojo.getTodate().toLocalDate());
         timeSlot.setId(pojo.getId().intValue());
         return new RoomTimeSlot(room, timeSlot);
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }

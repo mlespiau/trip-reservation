@@ -29,4 +29,13 @@ public class AuthorizationService {
         // This should authenticate against an authentication service 
         // the hotel agent code should be valid and that the session is active
     }
+    
+    public Customer createCustomerFromRequest(Request req) {
+        if (req.queryParams("customerToken") != null) {
+            assertAgentTokenIsValid();
+            return new Customer(Integer.parseInt(req.queryParams("customerCode")));
+        } else {
+            throw new InvalidUserException();
+        }
+    }
 }

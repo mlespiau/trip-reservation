@@ -1,13 +1,16 @@
 package feature;
 
-import framework.RequestParameters;
+import booking.BookingService;
 import hotel.HotelRepository;
 import hotel.HotelService;
 import hotel.RoomRepository;
 import hotel.RoomSearchSpecificationBuilder;
 import hotel.RoomService;
 import hotel.RoomTimeSlotRepository;
+import hotel.RoomTimeSlotService;
+import hotel.TimeSlotCutter;
 import security.AuthorizationService;
+import framework.RequestParameters;
 
 public class Application {
     // TODO: agentCode, customerCode and systemAdminCode should be part of the authentication API and be accessible from the user object
@@ -20,8 +23,9 @@ public class Application {
             new HotelRepository(),
             new RoomRepository());
         new CustomerEndpoints(
-        		authorizationService,
-        		new RoomTimeSlotRepository(),
-        		new RoomSearchSpecificationBuilder());
+            authorizationService,
+            new RoomTimeSlotRepository(),
+            new RoomSearchSpecificationBuilder(),
+            new BookingService(new TimeSlotCutter(), new RoomTimeSlotService()));
     }
 }

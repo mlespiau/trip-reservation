@@ -8,16 +8,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import test.generated.Tables;
+import test.generated.tables.daos.RoomtimeslotDao;
 import test.generated.tables.records.RoomtimeslotRecord;
 import framework.DaoException;
 import framework.Database;
 
-
+// TODO: Move generated classes to generated package instead of test.generated
 public class RoomTimeSlotService {
     Logger logger = LoggerFactory.getLogger(getClass()); 
 
-    public RoomTimeSlot create(Room room, TimeSlot timeSlot) {
-        RoomTimeSlot roomTimeSlot = new RoomTimeSlot(room, timeSlot);
+    public RoomTimeSlot create(RoomTimeSlot roomTimeSlot) {
         int id = this.save(roomTimeSlot);
         roomTimeSlot.getTimeSlot().setId(id);
         return roomTimeSlot;
@@ -36,5 +36,9 @@ public class RoomTimeSlotService {
         }
         return roomTimeSlotRecord.getId().intValue();
     }
-    
+
+    public void delete(RoomTimeSlot roomTimeSlot) {
+        RoomtimeslotDao dao = new RoomtimeslotDao(Database.getInstance().getConfiguraton());
+        dao.deleteById(UInteger.valueOf(roomTimeSlot.getTimeSlot().getId()));
+    }
 }

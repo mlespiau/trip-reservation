@@ -8,6 +8,7 @@ import hotel.HotelService;
 import hotel.Room;
 import hotel.RoomRepository;
 import hotel.RoomService;
+import hotel.RoomTimeSlot;
 import hotel.RoomTimeSlotService;
 import hotel.TimeSlot;
 import security.AuthorizationService;
@@ -34,13 +35,12 @@ public class HotelAgentEndpoints {
         }, json());
         post("/hotel/room/timeslot", (req, res) -> {
             HotelAgent hotelAgent = authorizationService.createHotelAgentFromRequest(req);
-            return roomTimeSlotService.create(roomRepository.findByCode(
-                    Integer.parseInt(req.queryParams("hotelCode")),
-                    Integer.parseInt(req.queryParams("roomCode")),
-                    hotelAgent.getCode()
-                ),
-                TimeSlot.fromQueryParams(req.queryMap())
-            );
+            RoomTimeSlot roomTimeSlot = new RoomTimeSlot(roomRepository.findByCode(
+                Integer.parseInt(req.queryParams("hotelCode")),
+                Integer.parseInt(req.queryParams("roomCode")),
+                hotelAgent.getCode()
+            ), TimeSlot.fromQueryParams(req.queryMap()));
+            return roomTimeSlotService.create(roomTimeSlot);
         }, json());
     }
 }

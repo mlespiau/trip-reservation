@@ -36,7 +36,7 @@ import test.generated.tables.records.RoomtimeslotRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Roomtimeslot extends TableImpl<RoomtimeslotRecord> {
 
-	private static final long serialVersionUID = 525796660;
+	private static final long serialVersionUID = 1147482989;
 
 	/**
 	 * The reference instance of <code>tripreservation.roomTimeSlot</code>
@@ -70,6 +70,11 @@ public class Roomtimeslot extends TableImpl<RoomtimeslotRecord> {
 	 * The column <code>tripreservation.roomTimeSlot.toDate</code>.
 	 */
 	public final TableField<RoomtimeslotRecord, Date> TODATE = createField("toDate", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
+
+	/**
+	 * The column <code>tripreservation.roomTimeSlot.bookingId</code>.
+	 */
+	public final TableField<RoomtimeslotRecord, UInteger> BOOKINGID = createField("bookingId", org.jooq.impl.SQLDataType.INTEGERUNSIGNED, this, "");
 
 	/**
 	 * Create a <code>tripreservation.roomTimeSlot</code> table reference
@@ -114,7 +119,7 @@ public class Roomtimeslot extends TableImpl<RoomtimeslotRecord> {
 	 */
 	@Override
 	public List<UniqueKey<RoomtimeslotRecord>> getKeys() {
-		return Arrays.<UniqueKey<RoomtimeslotRecord>>asList(Keys.KEY_ROOMTIMESLOT_PRIMARY, Keys.KEY_ROOMTIMESLOT_ID);
+		return Arrays.<UniqueKey<RoomtimeslotRecord>>asList(Keys.KEY_ROOMTIMESLOT_PRIMARY);
 	}
 
 	/**

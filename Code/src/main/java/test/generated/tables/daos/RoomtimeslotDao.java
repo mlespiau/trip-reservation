@@ -87,4 +87,11 @@ public class RoomtimeslotDao extends DAOImpl<RoomtimeslotRecord, RoomtimeslotPoj
 	public List<RoomtimeslotPojo> fetchByTodate(Date... values) {
 		return fetch(Roomtimeslot.ROOMTIMESLOT.TODATE, values);
 	}
+
+	/**
+	 * Fetch records that have <code>bookingId IN (values)</code>
+	 */
+	public List<RoomtimeslotPojo> fetchByBookingid(UInteger... values) {
+		return fetch(Roomtimeslot.ROOMTIMESLOT.BOOKINGID, values);
+	}
 }

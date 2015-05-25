@@ -25,12 +25,13 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RoomtimeslotPojo implements Serializable {
 
-	private static final long serialVersionUID = 152379390;
+	private static final long serialVersionUID = -1105146859;
 
 	private UInteger id;
 	private UInteger roomid;
 	private Date     fromdate;
 	private Date     todate;
+	private UInteger bookingid;
 
 	public RoomtimeslotPojo() {}
 
@@ -39,18 +40,21 @@ public class RoomtimeslotPojo implements Serializable {
 		this.roomid = value.roomid;
 		this.fromdate = value.fromdate;
 		this.todate = value.todate;
+		this.bookingid = value.bookingid;
 	}
 
 	public RoomtimeslotPojo(
 		UInteger id,
 		UInteger roomid,
 		Date     fromdate,
-		Date     todate
+		Date     todate,
+		UInteger bookingid
 	) {
 		this.id = id;
 		this.roomid = roomid;
 		this.fromdate = fromdate;
 		this.todate = todate;
+		this.bookingid = bookingid;
 	}
 
 	public UInteger getId() {
@@ -83,5 +87,13 @@ public class RoomtimeslotPojo implements Serializable {
 
 	public void setTodate(Date todate) {
 		this.todate = todate;
+	}
+
+	public UInteger getBookingid() {
+		return this.bookingid;
+	}
+
+	public void setBookingid(UInteger bookingid) {
+		this.bookingid = bookingid;
 	}
 }

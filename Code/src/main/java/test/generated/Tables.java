@@ -6,6 +6,7 @@ package test.generated;
 
 import javax.annotation.Generated;
 
+import test.generated.tables.Booking;
 import test.generated.tables.Hotel;
 import test.generated.tables.Room;
 import test.generated.tables.Roomtimeslot;
@@ -23,6 +24,11 @@ import test.generated.tables.Roomtimeslot;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+	/**
+	 * The table tripreservation.booking
+	 */
+	public static final Booking BOOKING = test.generated.tables.Booking.BOOKING;
 
 	/**
 	 * The table tripreservation.hotel

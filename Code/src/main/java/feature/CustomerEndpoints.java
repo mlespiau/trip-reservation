@@ -22,8 +22,6 @@ public class CustomerEndpoints {
         get("/hotel/room/timeslot/search", (req, res) -> {
         	// TODO: Authorize 
         	// TODO: Maybe users should be gathered before and the user API ask for different "permissions"
-//            Customer customer = authorizationService.createCustomerFromRequest(req);
-//            return hotelService.saveNew(Hotel.fromQueryParams(req.queryMap(), hotelAgent));
         	// TODO: Add pagination
             RoomSearchSpecification roomSearchSpecification = roomSearchSpecificationBuilder.fromQueryParams(new RequestParameters(req.queryMap()));
             return roomTimeSlotRepository.find(roomSearchSpecification);

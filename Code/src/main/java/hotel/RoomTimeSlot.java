@@ -4,6 +4,7 @@ import generated.tables.pojos.RoomtimeslotPojo;
 
 import org.jooq.Record;
 
+import room.Room;
 import booking.Booking;
 
 import com.google.gson.Gson;

@@ -5,12 +5,12 @@ import static spark.Spark.post;
 import hotel.Hotel;
 import hotel.HotelRepository;
 import hotel.HotelService;
-import hotel.Room;
-import hotel.RoomRepository;
-import hotel.RoomService;
 import hotel.RoomTimeSlot;
 import hotel.RoomTimeSlotService;
 import hotel.TimeSlot;
+import room.Room;
+import room.RoomRepository;
+import room.RoomService;
 import security.AuthorizationService;
 import security.HotelAgent;
 

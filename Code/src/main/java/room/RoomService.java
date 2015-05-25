@@ -1,4 +1,4 @@
-package hotel;
+package room;
 
 import org.jooq.exception.DataAccessException;
 import org.jooq.types.UInteger;

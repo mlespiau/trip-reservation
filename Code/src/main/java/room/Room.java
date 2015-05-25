@@ -1,6 +1,7 @@
-package hotel;
+package room;
 
 import generated.tables.pojos.RoomPojo;
+import hotel.Hotel;
 
 import org.jooq.Record;
 

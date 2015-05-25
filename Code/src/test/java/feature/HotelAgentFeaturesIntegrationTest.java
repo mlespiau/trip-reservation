@@ -5,8 +5,6 @@ import static org.junit.Assert.assertNotEquals;
 import framework.ApiError;
 import hotel.Hotel;
 import hotel.HotelService;
-import hotel.Room;
-import hotel.RoomService;
 import hotel.RoomTimeSlot;
 import hotel.TimeSlot;
 import integration.ApiIntegrationTest;
@@ -18,6 +16,9 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import room.Room;
+import room.RoomService;
 
 import com.google.gson.Gson;
 

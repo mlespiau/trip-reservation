@@ -3,12 +3,12 @@ package feature;
 import booking.BookingService;
 import hotel.HotelRepository;
 import hotel.HotelService;
-import hotel.RoomRepository;
 import hotel.RoomSearchSpecificationBuilder;
-import hotel.RoomService;
 import hotel.RoomTimeSlotRepository;
 import hotel.RoomTimeSlotService;
 import hotel.TimeSlotCutter;
+import room.RoomRepository;
+import room.RoomService;
 import security.AuthorizationService;
 import framework.RequestParameters;
 

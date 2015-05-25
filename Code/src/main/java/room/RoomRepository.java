@@ -1,10 +1,11 @@
-package hotel;
+package room;
 
 import static generated.tables.Hotel.HOTEL;
 import static generated.tables.Room.ROOM;
 import framework.DaoException;
 import framework.Database;
 import generated.tables.pojos.HotelPojo;
+import hotel.Hotel;
 
 import org.jooq.Record;
 import org.jooq.types.UInteger;

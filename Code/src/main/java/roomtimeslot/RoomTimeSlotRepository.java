@@ -1,8 +1,9 @@
-package hotel;
+package roomtimeslot;
 
 import static generated.tables.Hotel.HOTEL;
 import static generated.tables.Room.ROOM;
 import static generated.tables.Roomtimeslot.ROOMTIMESLOT;
+import hotel.RoomSearchSpecification;
 
 import java.util.ArrayList;
 import java.util.List;

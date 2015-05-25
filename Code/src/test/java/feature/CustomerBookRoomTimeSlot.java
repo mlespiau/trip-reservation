@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import hotel.RoomTimeSlot;
 import integration.ApiIntegrationTest;
 import integration.Request;
 import integration.TestResponse;
@@ -14,6 +13,8 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import roomtimeslot.RoomTimeSlot;
 
 public class CustomerBookRoomTimeSlot extends ApiIntegrationTest {
     @Before

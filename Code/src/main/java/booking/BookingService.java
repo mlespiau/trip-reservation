@@ -4,10 +4,6 @@ import framework.DaoException;
 import framework.Database;
 import generated.Tables;
 import generated.tables.records.BookingRecord;
-import hotel.RoomTimeSlot;
-import hotel.RoomTimeSlotService;
-import hotel.TimeSlot;
-import hotel.TimeSlotCutter;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -18,6 +14,10 @@ import org.jooq.types.UInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import roomtimeslot.RoomTimeSlot;
+import roomtimeslot.RoomTimeSlotService;
+import roomtimeslot.TimeSlot;
+import roomtimeslot.TimeSlotCutter;
 import security.Customer;
 
 public class BookingService {

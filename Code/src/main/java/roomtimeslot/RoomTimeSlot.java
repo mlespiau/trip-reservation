@@ -1,4 +1,4 @@
-package hotel;
+package roomtimeslot;
 
 import generated.tables.pojos.RoomtimeslotPojo;
 

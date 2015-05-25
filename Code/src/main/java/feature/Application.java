@@ -4,11 +4,11 @@ import booking.BookingService;
 import hotel.HotelRepository;
 import hotel.HotelService;
 import hotel.RoomSearchSpecificationBuilder;
-import hotel.RoomTimeSlotRepository;
-import hotel.RoomTimeSlotService;
-import hotel.TimeSlotCutter;
 import room.RoomRepository;
 import room.RoomService;
+import roomtimeslot.RoomTimeSlotRepository;
+import roomtimeslot.RoomTimeSlotService;
+import roomtimeslot.TimeSlotCutter;
 import security.AuthorizationService;
 import framework.RequestParameters;
 

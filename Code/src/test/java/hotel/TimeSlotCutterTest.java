@@ -10,6 +10,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import roomtimeslot.TimeSlot;
+import roomtimeslot.TimeSlotCutter;
+
 public class TimeSlotCutterTest {
     private TimeSlotCutter cutter;
     

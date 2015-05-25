@@ -1,7 +1,6 @@
 package feature;
 
 import static org.junit.Assert.*;
-import hotel.RoomTimeSlot;
 import integration.ApiIntegrationTest;
 import integration.Request;
 import integration.TestResponse;
@@ -14,6 +13,8 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import roomtimeslot.RoomTimeSlot;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

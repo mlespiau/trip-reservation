@@ -1,4 +1,4 @@
-package hotel;
+package roomtimeslot;
 
 import java.sql.Date;
 

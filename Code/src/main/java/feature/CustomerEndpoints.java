@@ -7,8 +7,8 @@ import booking.BookingService;
 import framework.RequestParameters;
 import hotel.RoomSearchSpecification;
 import hotel.RoomSearchSpecificationBuilder;
-import hotel.RoomTimeSlot;
-import hotel.RoomTimeSlotRepository;
+import roomtimeslot.RoomTimeSlot;
+import roomtimeslot.RoomTimeSlotRepository;
 import security.AuthorizationService;
 import security.Customer;
 
